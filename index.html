@@ -7,6 +7,7 @@
 <meta name="description" content="Nguyen Hoang Minh. UX research and product discovery. Journeys, value mapping, BRD and user stories, UAT, and lo-fi to hi-fi testing that lead to the right product." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23ff5a36'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='15' font-weight='800' fill='%23fff' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=jetbrains-mono@400,500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -267,6 +268,227 @@
   .reveal{ opacity:0; transform:translateY(26px); }
   .rfade{ opacity:0; }
   @media(prefers-reduced-motion: reduce){ .reveal,.rfade{ opacity:1; transform:none; } html{ scroll-behavior:auto; } .fcard{ transform:none !important; } }
+
+  /* ===== AI PRODUCT STUDIO v4 (hand-drawn doodle) ===== */
+  .ai-overlay, .ai-fab, .ai-hint{
+    --dk:#24365e; --dk2:#3a4f80; --yel:#f6c34d; --yelsoft:#fdf1cf; --blu:#2f6fb8; --blusoft:#e8f1fb;
+    --redd:#e0492f; --redsoft:#fdeae4; --grn:#2f9469; --grnsoft:#eaf6ee; --paperw:#fdfcf7;
+    --wob1:255px 15px 225px 15px / 15px 225px 15px 255px;
+    --wob2:15px 255px 15px 225px / 225px 15px 255px 15px;
+    font-family:'Patrick Hand','Satoshi',cursive;
+  }
+  .ai-fab{ position:fixed; right:22px; bottom:22px; z-index:150; display:inline-flex; align-items:center; gap:10px;
+    padding:14px 24px; border:2.5px solid var(--dk); border-radius:var(--wob1); background:var(--yel); color:var(--dk);
+    font-size:1.18rem; font-weight:700; cursor:pointer; box-shadow:4px 5px 0 rgba(36,54,94,0.9);
+    transition:.2s var(--ease); animation:aiRock 5s ease-in-out infinite; }
+  .ai-fab:hover{ transform:translateY(-3px) rotate(-1deg); box-shadow:6px 8px 0 rgba(36,54,94,0.9); }
+  .ai-fab .dot{ width:10px; height:10px; border-radius:50%; background:var(--redd); border:2px solid var(--dk); animation:aipulse 2s ease-in-out infinite; }
+  @keyframes aipulse{ 50%{ opacity:.35; transform:scale(.8);} }
+  @keyframes aiRock{ 0%,86%,100%{ transform:rotate(0);} 90%{ transform:rotate(-2.4deg);} 94%{ transform:rotate(2deg);} 97%{ transform:rotate(-1deg);} }
+  .ai-hint{ position:fixed; right:30px; bottom:88px; z-index:150; background:#fff; border:2.5px solid var(--dk);
+    border-radius:var(--wob2); padding:10px 16px; font-size:1.05rem; font-weight:700; color:var(--dk);
+    box-shadow:3px 4px 0 rgba(36,54,94,0.85); transform:rotate(-2deg); transition:.3s ease; cursor:pointer; }
+  .ai-hint::after{ content:""; position:absolute; top:100%; right:34px; border:9px solid transparent; border-top-color:var(--dk); }
+  .ai-hint.off{ opacity:0; pointer-events:none; transform:rotate(-2deg) translateY(8px); }
+
+  .ai-overlay{ position:fixed; inset:0; z-index:400; background:rgba(36,54,94,0.42); backdrop-filter:blur(7px);
+    -webkit-backdrop-filter:blur(7px); display:grid; place-items:center; padding:18px;
+    opacity:0; pointer-events:none; transition:opacity .35s ease; }
+  .ai-overlay.open{ opacity:1; pointer-events:auto; }
+  .ai-shell{ width:min(1220px,100%); height:min(94vh,880px); max-height:min(94vh,880px); background:var(--paperw);
+    border:3px solid var(--dk); border-radius:26px 20px 28px 18px / 20px 28px 18px 26px;
+    box-shadow:8px 10px 0 rgba(36,54,94,0.28), 0 40px 110px rgba(24,25,29,0.35);
+    display:flex; flex-direction:column; overflow:hidden;
+    transform:translateY(14px) scale(.985); transition:transform .35s var(--ease); }
+  .ai-overlay.open .ai-shell{ transform:none; }
+
+  .ai-head{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px;
+    border-bottom:2.5px solid var(--dk); background:#fff; }
+  .ai-head .ai-eyebrow{ display:inline-block; font-size:1rem; letter-spacing:0.04em; color:var(--dk); font-weight:700;
+    background:var(--blusoft); border:2px solid var(--dk); border-radius:var(--wob1); padding:2px 14px; transform:rotate(-1.2deg); position:relative; }
+  .ai-head .ai-eyebrow::before{ content:"\2740"; position:absolute; left:-22px; top:-4px; color:var(--yel); font-size:1rem;
+    text-shadow:0 0 0 var(--dk); }
+  .ai-head h3{ font-family:'Caveat','Patrick Hand',cursive; font-size:1.8rem; font-weight:700; margin-top:4px; color:var(--dk); letter-spacing:0; }
+  .ai-head h3 .hl{ background:linear-gradient(0deg, var(--yel) 0 42%, transparent 42%); padding:0 3px; }
+  .ai-team{ display:flex; align-items:center; margin-left:auto; }
+  .ai-team .fc{ position:relative; width:36px; height:36px; border-radius:50%; background:#fff; border:2.5px solid var(--dk);
+    box-shadow:2px 3px 0 rgba(36,54,94,0.6); margin-left:-9px; cursor:help; }
+  .ai-team .fc svg{ width:100%; height:100%; display:block; border-radius:50%; }
+  .ai-team .fc.star{ margin-left:14px; width:42px; height:42px; background:var(--yel); }
+  .ai-team .fc.star::after{ width:250px; }
+  .ai-team .fc::after{ content:attr(data-tip); position:absolute; top:calc(100% + 13px); right:-12px; width:225px;
+    background:#fff; border:2.5px solid var(--dk); border-radius:var(--wob2); padding:9px 13px;
+    font-size:0.9rem; font-weight:600; line-height:1.35; color:var(--dk); text-align:left; white-space:normal;
+    box-shadow:3px 4px 0 rgba(36,54,94,0.4); opacity:0; pointer-events:none; transform:translateY(5px); transition:.2s ease; z-index:30; }
+  .ai-team .fc::before{ content:""; position:absolute; top:calc(100% + 3px); right:12px; border:6px solid transparent;
+    border-bottom-color:var(--dk); opacity:0; transition:.2s ease; z-index:31; }
+  .ai-team .fc:hover::after, .ai-team .fc:focus::after, .ai-team .fc:hover::before, .ai-team .fc:focus::before{ opacity:1; transform:none; }
+  .ai-close{ width:42px; height:42px; border-radius:50% 46% 52% 48%; border:2.5px solid var(--dk); background:#fff; color:var(--dk);
+    font-size:22px; cursor:pointer; transition:.2s ease; line-height:1; flex:0 0 auto; font-family:inherit;
+    box-shadow:2px 3px 0 rgba(36,54,94,0.6); }
+  .ai-close:hover{ background:var(--redd); color:#fff; transform:rotate(90deg); }
+  .ai-panel{ display:grid; grid-template-columns:1.22fr 0.84fr; gap:0; flex:1; min-height:0; }
+
+  /* ---- left: doodle studio ---- */
+  .ai-left{ display:flex; flex-direction:column; gap:10px; padding:16px 0 16px 16px; min-height:0; }
+  .ai-stage{ position:relative; border:2.5px solid var(--dk); border-radius:20px 16px 22px 15px / 16px 22px 15px 20px;
+    overflow:hidden; flex:1; min-height:390px; background:#ffffff; }
+  .ai-secno{ position:absolute; z-index:9; top:3px; left:8px; display:flex; align-items:center; gap:7px;
+    transform:scale(.88); transform-origin:left top; }
+  .ai-secno .no{ width:25px; height:25px; border-radius:50%; background:var(--yel); border:2.5px solid var(--dk);
+    display:grid; place-items:center; font-weight:700; color:var(--dk); font-size:0.92rem; }
+  .ai-secno .tt{ font-weight:700; color:var(--dk); font-size:0.98rem; background:#fff; border:2px solid var(--dk);
+    border-radius:var(--wob2); padding:0 11px; }
+  .ai-secno.chat{ position:static; padding:14px 20px 0; display:flex; transform:none; }
+  .ai-scene{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .ai-loc{ position:absolute; transform:translate(-50%,-50%) rotate(-1deg); z-index:3; font-size:0.86rem; font-weight:700;
+    background:#fff; border:2px dashed var(--dk2); color:var(--dk); border-radius:var(--wob1); padding:1px 10px; white-space:nowrap; }
+
+  .ai-agent{ position:absolute; left:0; top:0; z-index:5; transition:transform 1.3s var(--ease); will-change:transform; }
+  .ai-agent.jump{ transition:none !important; }
+  .ai-agent.talk{ z-index:9; }
+  .ai-agent .shadow{ position:absolute; left:-15px; top:-5px; width:30px; height:9px; border-radius:50%; background:rgba(36,54,94,0.16); }
+  .ai-agent .person{ position:absolute; left:-24px; top:-60px; width:48px; height:62px; }
+  .ai-agent .person svg{ width:100%; height:100%; overflow:visible; display:block; }
+  .ai-agent .person{ animation:aiIdle 3.4s ease-in-out infinite; }
+  .ai-agent.walk .person{ animation:aiHop .34s ease-in-out infinite; }
+  .ai-agent .leg1,.ai-agent .leg2{ transform-origin:50% 0%; transform-box:fill-box; }
+  .ai-agent.walk .leg1{ animation:aiStepA .34s linear infinite; }
+  .ai-agent.walk .leg2{ animation:aiStepB .34s linear infinite; }
+  @keyframes aiIdle{ 50%{ transform:translateY(-2.5px); } }
+  @keyframes aiHop{ 50%{ transform:translateY(-4px); } }
+  @keyframes aiStepA{ 0%,100%{ transform:rotate(16deg);} 50%{ transform:rotate(-16deg);} }
+  @keyframes aiStepB{ 0%,100%{ transform:rotate(-16deg);} 50%{ transform:rotate(16deg);} }
+  .ai-agent .arm1,.ai-agent .arm2{ transform-origin:50% 15%; transform-box:fill-box; }
+  .ai-agent.work .arm1{ animation:aiType .5s ease-in-out infinite; }
+  .ai-agent.work .arm2{ animation:aiType .5s ease-in-out .25s infinite; }
+  @keyframes aiType{ 0%,100%{ transform:rotate(0);} 50%{ transform:rotate(-16deg);} }
+  .ai-agent .tag{ position:absolute; top:8px; left:50%; transform:translateX(-50%); white-space:nowrap; font-size:0.78rem;
+    font-weight:700; background:#fff; color:var(--dk); border:2px solid var(--dk); border-radius:var(--wob1); padding:0 8px; }
+  .ai-agent .tag.tag-star{ background:var(--yel); font-size:0.9rem; padding:1px 10px; box-shadow:2px 3px 0 rgba(36,54,94,0.45); }
+  .ai-agent .bub{ position:absolute; bottom:70px; left:50%; transform:translateX(-50%) translateY(4px); width:max-content; max-width:200px;
+    background:#fff; border:2.5px solid var(--dk); border-radius:var(--wob2); padding:7px 12px; font-size:0.95rem; line-height:1.35;
+    color:var(--dk); box-shadow:3px 4px 0 rgba(36,54,94,0.5); opacity:0; transition:.25s ease; pointer-events:none; z-index:7; }
+  .ai-agent .bub::after{ content:""; position:absolute; top:100%; left:50%; margin-left:-6px; border:7px solid transparent; border-top-color:var(--dk); }
+  .ai-agent .bub.on{ opacity:1; transform:translateX(-50%) translateY(0); }
+  .ai-agent[data-agent="hana"] .bub{ left:36%; }
+  .ai-agent[data-agent="vy"] .bub{ left:64%; }
+  .ai-agent[data-agent="visitor"] .bub{ left:40%; }
+
+  /* scene life */
+  .steam path{ animation:aiSteam 2.8s ease-in-out infinite; opacity:0; }
+  .steam path:nth-child(2){ animation-delay:1.4s; }
+  @keyframes aiSteam{ 0%{ transform:translateY(0); opacity:0;} 25%{ opacity:.85;} 100%{ transform:translateY(-16px); opacity:0;} }
+  .mbars rect{ transform-origin:50% 100%; transform-box:fill-box; animation:aiBars 2.6s ease-in-out infinite; }
+  .mbars rect:nth-child(2){ animation-delay:.35s; } .mbars rect:nth-child(3){ animation-delay:.7s; } .mbars rect:nth-child(4){ animation-delay:1.05s; }
+  @keyframes aiBars{ 0%,100%{ transform:scaleY(.55);} 50%{ transform:scaleY(1);} }
+  .leaves{ transform-origin:50% 100%; transform-box:fill-box; animation:aiSway 5.5s ease-in-out infinite; }
+  @keyframes aiSway{ 0%,100%{ transform:rotate(-2.5deg);} 50%{ transform:rotate(3deg);} }
+  .phindrop{ animation:aiDrip 1.9s ease-in infinite; }
+  @keyframes aiDrip{ 0%{ transform:translateY(0); opacity:0;} 15%{ opacity:1;} 85%{ transform:translateY(9px); opacity:1;} 100%{ opacity:0;} }
+  .lantern{ transform-origin:50% 0%; transform-box:fill-box; animation:aiSwing 4.6s ease-in-out infinite; }
+  @keyframes aiSwing{ 0%,100%{ transform:rotate(-3deg);} 50%{ transform:rotate(3deg);} }
+  .vydraw{ opacity:0; }
+  .idlework .vydraw{ opacity:1; stroke-dasharray:110; animation:aiDraw 3.4s linear infinite; }
+  @keyframes aiDraw{ from{ stroke-dashoffset:110; } to{ stroke-dashoffset:0; } }
+  #minhCaret{ opacity:0; }
+  .idlework #minhCaret{ animation:aiBlink 1s steps(1) infinite; }
+  @keyframes aiBlink{ 0%,49%{ opacity:1; } 50%,100%{ opacity:0; } }
+
+  /* handoff log */
+  .ai-log{ display:flex; align-items:center; gap:12px; background:#fff; border:2.5px solid var(--dk);
+    border-radius:var(--wob2); padding:9px 14px; box-shadow:3px 4px 0 rgba(36,54,94,0.25); }
+  .ai-log .lgface{ width:36px; height:36px; border-radius:50%; background:#fff; border:2.5px solid var(--dk); overflow:hidden; flex:0 0 auto; }
+  .ai-log .lgface svg{ width:100%; height:100%; display:block; }
+  .ai-log .lgmid{ flex:1; min-width:0; }
+  .ai-log .lg-t{ font-size:0.82rem; letter-spacing:0.06em; font-weight:700; color:var(--dk);
+    background:linear-gradient(0deg, var(--yel) 0 40%, transparent 40%); padding:0 2px; }
+  .ai-log .lg-list{ display:block; height:20px; overflow:hidden; }
+  .ai-log .lg-list div{ font-size:0.9rem; color:var(--dk2); line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ai-log .lg-list b{ color:var(--dk); }
+  .ai-log .lgdot{ display:inline-block; width:8px; height:8px; border-radius:50%; border:1.5px solid var(--dk); margin-right:6px; vertical-align:0; }
+  .ai-status{ font-size:0.82rem; font-weight:700; padding:3px 12px; border:2px solid var(--dk); border-radius:var(--wob1);
+    background:var(--yel); color:var(--dk); letter-spacing:0.06em; flex:0 0 auto; }
+
+  /* ---- right: doodle notes ---- */
+  .ai-chat{ display:flex; flex-direction:column; min-height:0; border-left:2.5px solid var(--dk);
+    background:#fff radial-gradient(rgba(36,54,94,0.08) 1.4px, transparent 1.4px); background-size:26px 26px; }
+  .ai-msgs{ flex:1; overflow-y:auto; padding:14px 20px 8px; display:flex; flex-direction:column; gap:13px; min-height:0; }
+  .ai-m{ max-width:94%; padding:11px 15px; font-size:1.02rem; line-height:1.42; }
+  .ai-m.user{ align-self:flex-end; background:var(--dk); color:#fff; border:2.5px solid var(--dk);
+    border-radius:var(--wob1); box-shadow:3px 4px 0 rgba(36,54,94,0.35); }
+  .ai-m.bot{ align-self:flex-start; background:#fff; border:2.5px solid var(--dk); border-radius:var(--wob2);
+    color:#41507a; box-shadow:3px 4px 0 rgba(36,54,94,0.22); }
+  .ai-m.bot b{ color:var(--dk); }
+  .ai-m.bot .who{ display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+  .ai-m.bot .who .fc{ width:26px; height:26px; border-radius:50%; background:#fff; border:2px solid var(--dk); overflow:hidden; flex:0 0 auto; }
+  .ai-m.bot .who .fc svg{ width:100%; height:100%; display:block; }
+  .ai-m.bot .who .wn{ font-size:0.95rem; font-weight:700; color:var(--dk); padding:0 3px;
+    background:linear-gradient(0deg, var(--who,#f6c34d) 0 38%, transparent 38%); }
+  .ai-m.bot .who .wr{ font-size:0.8rem; color:var(--dk2); font-weight:600; }
+  .ai-typing{ display:inline-flex; gap:4px; padding:4px 2px; }
+  .ai-typing i{ width:7px; height:7px; border-radius:50%; background:var(--dk2); animation:aityp 1s ease-in-out infinite; }
+  .ai-typing i:nth-child(2){ animation-delay:.15s } .ai-typing i:nth-child(3){ animation-delay:.3s }
+  @keyframes aityp{ 50%{ opacity:.25; transform:translateY(-3px);} }
+
+  .ai-m .ai-table{ width:100%; border-collapse:collapse; margin-top:9px; font-size:0.88rem; }
+  .ai-m .ai-table th{ text-align:left; font-size:0.78rem; letter-spacing:0.05em; color:var(--dk); font-weight:700;
+    padding:0 8px 5px 0; border-bottom:2px dashed var(--dk2); }
+  .ai-m .ai-table td{ border-top:1.5px solid rgba(36,54,94,0.25); padding:7px 8px 7px 0; color:#41507a; vertical-align:top; }
+  .ai-m .ai-table tr:first-child td{ border-top:none; }
+  .ai-m .ai-table td b{ color:var(--dk); }
+  .ai-bars{ margin-top:9px; display:grid; gap:8px; }
+  .ai-bar{ display:grid; grid-template-columns:128px 1fr 34px; align-items:center; gap:9px; font-size:0.88rem; }
+  .ai-bar .bl{ color:var(--dk); font-weight:700; } .ai-bar .bv{ color:var(--dk2); text-align:right; font-weight:700; }
+  .ai-bar .track{ height:13px; border:2px solid var(--dk); border-radius:var(--wob1); background:#fff; overflow:hidden; }
+  .ai-bar .track i{ display:block; height:100%; background:repeating-linear-gradient(-55deg, var(--yel) 0 7px, #f9d47c 7px 14px);
+    border-right:2px solid var(--dk); transform:scaleX(0); transform-origin:left; transition:transform .9s var(--ease); }
+  .ai-m .cap{ display:block; margin-top:8px; font-size:0.8rem; color:var(--dk2); font-style:italic; }
+
+  /* sticky-note chips */
+  .ai-chips{ display:flex; flex-wrap:wrap; gap:10px; padding:12px 20px 6px; }
+  .ai-chip{ position:relative; font-family:inherit; font-size:0.95rem; font-weight:700; color:var(--dk); padding:10px 13px 8px;
+    border:2px solid var(--dk); border-radius:3px 10px 4px 9px; cursor:pointer; transform:rotate(-1.6deg);
+    box-shadow:3px 4px 0 rgba(36,54,94,0.35); transition:.2s var(--ease); }
+  .ai-chip::before{ content:""; position:absolute; top:-6px; left:50%; transform:translateX(-50%) rotate(2deg);
+    width:28px; height:10px; background:rgba(255,255,255,0.72); border:1.5px solid rgba(36,54,94,0.4); border-radius:2px; }
+  .ai-chip:nth-child(6n+1){ background:var(--yelsoft); } .ai-chip:nth-child(6n+2){ background:var(--grnsoft); transform:rotate(1.4deg); }
+  .ai-chip:nth-child(6n+3){ background:var(--redsoft); } .ai-chip:nth-child(6n+4){ background:var(--blusoft); transform:rotate(1.8deg); }
+  .ai-chip:nth-child(6n+5){ background:#f6ecdd; } .ai-chip:nth-child(6n){ background:#f3e3f4; transform:rotate(-1.2deg); }
+  .ai-chip:hover{ transform:rotate(0deg) translateY(-4px); box-shadow:4px 7px 0 rgba(36,54,94,0.4); }
+
+  .ai-inputrow{ display:flex; gap:10px; padding:12px 20px 18px; border-top:2px dashed var(--dk2); align-items:center; background:#fff; }
+  .ai-inputrow input{ flex:1; font-family:inherit; font-size:1.05rem; padding:11px 18px; border:2.5px solid var(--dk);
+    border-radius:var(--wob1); background:#fff; color:var(--dk); outline:none; }
+  .ai-inputrow input::placeholder{ color:#8d9ab8; }
+  .ai-inputrow input:focus{ box-shadow:3px 4px 0 rgba(36,54,94,0.3); }
+  .ai-inputrow button{ width:50px; height:50px; border-radius:48% 52% 46% 54%; border:2.5px solid var(--dk); background:var(--yel);
+    color:var(--dk); cursor:pointer; transition:.2s ease; display:grid; place-items:center; flex:0 0 auto;
+    box-shadow:3px 4px 0 rgba(36,54,94,0.5); }
+  .ai-inputrow button svg{ width:21px; height:21px; display:block; }
+  .ai-inputrow button:hover{ transform:translateY(-2px) rotate(-8deg); box-shadow:4px 6px 0 rgba(36,54,94,0.55); }
+  .ai-inputrow button:disabled{ opacity:.5; cursor:default; transform:none; }
+
+  .ai-typecaret{ display:inline-block; width:9px; height:1em; background:var(--dk); margin-left:3px; vertical-align:-2px;
+    animation:aiCaret .85s steps(1) infinite; }
+  @keyframes aiCaret{ 0%,49%{ opacity:1; } 50%,100%{ opacity:0; } }
+  .ai-m .fadein{ animation:aiFadeIn .45s ease; }
+  @keyframes aiFadeIn{ from{ opacity:0; transform:translateY(5px);} to{ opacity:1; transform:none; } }
+
+  @media(max-width:940px){
+    .ai-panel{ grid-template-columns:1fr; }
+    .ai-left{ display:none; }
+    .ai-chat{ border-left:none; }
+    .ai-shell{ max-height:94vh; }
+    .ai-team{ display:none; }
+  }
+  @media(prefers-reduced-motion: reduce){
+    .ai-agent,.ai-agent .person{ transition:none; animation:none !important; }
+    .ai-agent.walk .leg1,.ai-agent.walk .leg2,.ai-agent.work .arm1,.ai-agent.work .arm2{ animation:none; }
+    .ai-fab{ animation:none; } .ai-fab .dot,.steam path,.mbars rect,.leaves,.phindrop,.lantern{ animation:none !important; }
+    .idlework .vydraw,.idlework #minhCaret{ animation:none !important; opacity:1; }
+    .ai-bar .track i{ transition:none; }
+  }
 </style>
 </head>
 <body>
@@ -282,6 +504,7 @@
       <a href="#requirements">Requirements</a>
       <a href="#testing">Testing</a>
       <a href="#about">About</a>
+      <a href="#" id="aiNavOpen">AI Studio</a>
       <a href="#contact" class="nav-cta">Get in touch</a>
     </div>
   </div>
@@ -622,6 +845,225 @@
 <footer><div class="foot"><span>© 2026 Nguyen Hoang Minh · UX Research &amp; Product</span><span>Ho Chi Minh City</span></div></footer>
 </main>
 
+<!-- ===== AI PRODUCT STUDIO ===== -->
+<button class="ai-fab" id="aiFab" type="button" aria-haspopup="dialog"><span class="dot"></span> AI Studio</button>
+<div class="ai-hint" id="aiHint" aria-hidden="true">Meet my AI team!</div>
+
+<div class="ai-overlay" id="aiOverlay" role="dialog" aria-modal="true" aria-label="hwinh's Product Studio, multi-agent assistant">
+  <div class="ai-shell">
+    <header class="ai-head">
+      <div>
+        <span class="ai-eyebrow">HWINH'S PRODUCT STUDIO</span>
+        <h3>Four agents, <span class="hl">one answer</span>. Ask anything about Minh.</h3>
+      </div>
+      <div class="ai-team" id="aiTeam" aria-hidden="true"></div>
+      <button class="ai-close" id="aiClose" type="button" aria-label="Close">&times;</button>
+    </header>
+
+    <div class="ai-panel">
+      <!-- LEFT: doodle studio -->
+      <div class="ai-left">
+        <div class="ai-stage" id="aiStage" aria-hidden="true">
+          <span class="ai-secno"><span class="no">1</span><span class="tt">Studio floor</span></span>
+          <svg class="ai-scene" viewBox="0 0 1000 640" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <pattern id="aidots" width="34" height="34" patternUnits="userSpaceOnUse">
+                <circle cx="3" cy="3" r="1.7" fill="#dde4f0"/>
+              </pattern>
+            </defs>
+            <!-- wall + floor -->
+            <rect x="0" y="0" width="1000" height="164" fill="#fbf7ec"/>
+            <rect x="0" y="164" width="1000" height="476" fill="#ffffff"/>
+            <rect x="0" y="172" width="1000" height="468" fill="url(#aidots)"/>
+            <line x1="0" y1="164" x2="1000" y2="164" stroke="#24365e" stroke-width="3"/>
+
+            <!-- doodle sparkles -->
+            <g stroke="#24365e" stroke-width="2.4" stroke-linecap="round">
+              <path d="M306,16 v12 M300,22 h12"/>
+              <path d="M40,58 l7,-7 M44,64 l10,-3 M38,50 l3,-10"/>
+            </g>
+
+            <!-- door + welcome mat -->
+            <rect x="2" y="250" width="16" height="160" rx="5" fill="#f4e5c9" stroke="#24365e" stroke-width="3"/>
+            <path d="M20,258 A96,96 0 0 1 114,352" fill="none" stroke="#8d9ab8" stroke-width="2.5" stroke-dasharray="8 8"/>
+            <rect x="34" y="368" width="98" height="34" rx="9" fill="#fdeae4" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="41" y="374" width="84" height="22" rx="6" fill="none" stroke="#e0492f" stroke-width="2" stroke-dasharray="6 5"/>
+
+            <!-- research whiteboard: wireframe sketch -->
+            <rect x="70" y="40" width="240" height="116" rx="10" fill="#ffffff" stroke="#24365e" stroke-width="3"/>
+            <rect x="84" y="52" width="150" height="92" rx="5" fill="#ffffff" stroke="#24365e" stroke-width="2"/>
+            <line x1="84" y1="66" x2="234" y2="66" stroke="#24365e" stroke-width="2"/>
+            <circle cx="91" cy="59" r="2.6" fill="#e0492f"/>
+            <line x1="98" y1="59" x2="118" y2="59" stroke="#24365e" stroke-width="2" stroke-linecap="round"/>
+            <rect x="92" y="72" width="68" height="34" fill="#e8f1fb" stroke="#24365e" stroke-width="1.8"/>
+            <line x1="92" y1="72" x2="160" y2="106" stroke="#24365e" stroke-width="1.4"/>
+            <line x1="160" y1="72" x2="92" y2="106" stroke="#24365e" stroke-width="1.4"/>
+            <line x1="168" y1="78" x2="224" y2="78" stroke="#24365e" stroke-width="2" stroke-linecap="round"/>
+            <line x1="168" y1="86" x2="216" y2="86" stroke="#24365e" stroke-width="2" stroke-linecap="round"/>
+            <line x1="168" y1="94" x2="220" y2="94" stroke="#24365e" stroke-width="2" stroke-linecap="round"/>
+            <rect x="168" y="100" width="36" height="13" rx="3" fill="#f6c34d" stroke="#24365e" stroke-width="1.8"/>
+            <rect x="92" y="112" width="40" height="20" rx="3" fill="#fdf1cf" stroke="#24365e" stroke-width="1.6"/>
+            <rect x="138" y="112" width="40" height="20" rx="3" fill="#eaf6ee" stroke="#24365e" stroke-width="1.6"/>
+            <path d="M214,104 l7,10 l3,-4 l5,3" fill="none" stroke="#24365e" stroke-width="1.8" stroke-linecap="round"/>
+            <rect class="vydraw" x="186" y="118" width="38" height="18" rx="3" fill="none" stroke="#e0492f" stroke-width="2"/>
+            <rect x="276" y="46" width="22" height="22" rx="3" fill="#f6c34d" stroke="#24365e" stroke-width="1.6" transform="rotate(-5 287 57)"/>
+            <rect x="274" y="84" width="22" height="22" rx="3" fill="#bfe3d2" stroke="#24365e" stroke-width="1.6" transform="rotate(4 285 95)"/>
+            <line x1="138" y1="160" x2="248" y2="160" stroke="#24365e" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- window -->
+            <rect x="322" y="28" width="150" height="112" rx="10" fill="#e8f1fb" stroke="#24365e" stroke-width="3"/>
+            <line x1="397" y1="30" x2="397" y2="138" stroke="#24365e" stroke-width="2.5"/>
+            <line x1="324" y1="84" x2="470" y2="84" stroke="#24365e" stroke-width="2.5"/>
+            <circle cx="443" cy="57" r="12" fill="#f6c34d" stroke="#24365e" stroke-width="2.5"/>
+            <g stroke="#24365e" stroke-width="2" stroke-linecap="round">
+              <path d="M443,40 v-5 M443,74 v5 M426,57 h-5 M460,57 h5 M431,45 l-4,-4 M455,45 l4,-4 M431,69 l-4,4 M455,69 l4,4"/>
+            </g>
+            <path d="M338,122 Q352,108 368,118 Q380,108 394,116" fill="none" stroke="#8fb8d8" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Hoi An lantern -->
+            <g transform="translate(672,4)"><g class="lantern">
+              <line x1="0" y1="0" x2="0" y2="12" stroke="#24365e" stroke-width="2.2"/>
+              <rect x="-6" y="12" width="12" height="5" rx="2" fill="#f6c34d" stroke="#24365e" stroke-width="1.8"/>
+              <ellipse cx="0" cy="32" rx="13" ry="16" fill="#e0492f" stroke="#24365e" stroke-width="2.2"/>
+              <path d="M-6,19 Q-9,32 -6,45 M6,19 Q9,32 6,45" fill="none" stroke="#24365e" stroke-width="1.3" opacity=".7"/>
+              <rect x="-6" y="46" width="12" height="5" rx="2" fill="#f6c34d" stroke="#24365e" stroke-width="1.8"/>
+              <line x1="0" y1="51" x2="0" y2="62" stroke="#e0492f" stroke-width="2.2"/>
+              <path d="M-3,62 h6 l-3,7 Z" fill="#f6c34d" stroke="#24365e" stroke-width="1.4"/>
+            </g></g>
+
+            <!-- Vietnam flag -->
+            <rect x="520" y="38" width="94" height="70" fill="#d4453a"/>
+            <g transform="translate(567,73)">
+              <path d="M0,-16 L3.76,-5.18 L15.2,-4.9 L6.09,1.98 L9.4,12.9 L0,6.4 L-9.4,12.9 L-6.09,1.98 L-15.2,-4.9 L-3.76,-5.18 Z"
+                fill="#f6c34d" stroke="#24365e" stroke-width="1.6" stroke-linejoin="round"/>
+            </g>
+            <rect x="516" y="34" width="102" height="78" rx="8" fill="none" stroke="#24365e" stroke-width="3"/>
+
+            <!-- bookshelf + trophy + plant -->
+            <rect x="740" y="26" width="200" height="126" rx="9" fill="#ffffff" stroke="#24365e" stroke-width="3"/>
+            <line x1="744" y1="86" x2="936" y2="86" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="758" y="46" width="9" height="37" fill="#e0492f" stroke="#24365e" stroke-width="1.5"/>
+            <rect x="770" y="52" width="9" height="31" fill="#2f6fb8" stroke="#24365e" stroke-width="1.5"/>
+            <rect x="782" y="44" width="9" height="39" fill="#2f9469" stroke="#24365e" stroke-width="1.5"/>
+            <rect x="794" y="54" width="9" height="29" fill="#f6c34d" stroke="#24365e" stroke-width="1.5"/>
+            <rect x="806" y="48" width="9" height="35" fill="#9db8ff" stroke="#24365e" stroke-width="1.5"/>
+            <rect x="818" y="55" width="9" height="28" fill="#f7cfd8" stroke="#24365e" stroke-width="1.5"/>
+            <g transform="translate(858,98)">
+              <path d="M10,0 h24 v10 a12,12 0 0 1 -24,0 Z" fill="#f6c34d" stroke="#24365e" stroke-width="2.2"/>
+              <path d="M10,3 h-6 a7,7 0 0 0 7,9 M34,3 h6 a7,7 0 0 1 -7,9" fill="none" stroke="#24365e" stroke-width="2.2"/>
+              <rect x="18" y="22" width="8" height="7" fill="#f6c34d" stroke="#24365e" stroke-width="2"/>
+              <rect x="12" y="29" width="20" height="6" rx="2" fill="#fff" stroke="#24365e" stroke-width="2"/>
+            </g>
+            <g transform="translate(890,96)">
+              <g class="leaves"><path d="M12,26 C4,18 4,8 12,2 C20,8 20,18 12,26" fill="#8fc9ad" stroke="#24365e" stroke-width="2"/></g>
+              <rect x="4" y="24" width="16" height="11" rx="3" fill="#fdeae4" stroke="#24365e" stroke-width="2"/>
+            </g>
+
+            <!-- Minh's desk -->
+            <rect x="700" y="256" width="16" height="44" fill="#f4e5c9" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="904" y="256" width="16" height="44" fill="#f4e5c9" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="712" y="278" width="52" height="14" rx="7" fill="#e8f1fb" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="742" y="288" width="9" height="30" rx="4.5" fill="#fff" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="722" y="318" width="34" height="7" rx="3.5" fill="#fff" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="688" y="238" width="244" height="20" rx="10" fill="#f4e5c9" stroke="#24365e" stroke-width="3"/>
+            <rect x="800" y="228" width="12" height="12" fill="#fff" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="756" y="176" width="98" height="56" rx="7" fill="#ffffff" stroke="#24365e" stroke-width="3"/>
+            <rect x="768" y="188" width="22" height="8" rx="2" fill="#e0492f" stroke="#24365e" stroke-width="1.2"/>
+            <rect x="768" y="200" width="22" height="8" rx="2" fill="#fdeae4" stroke="#24365e" stroke-width="1.2"/>
+            <rect x="796" y="188" width="22" height="8" rx="2" fill="#f6c34d" stroke="#24365e" stroke-width="1.2"/>
+            <rect x="796" y="200" width="22" height="8" rx="2" fill="#fdf1cf" stroke="#24365e" stroke-width="1.2"/>
+            <rect x="824" y="188" width="18" height="8" rx="2" fill="#2f9469" stroke="#24365e" stroke-width="1.2"/>
+            <rect x="824" y="200" width="18" height="8" rx="2" fill="#eaf6ee" stroke="#24365e" stroke-width="1.2"/>
+            <rect id="minhCaret" x="845" y="196" width="3" height="12" fill="#24365e"/>
+            <rect x="874" y="220" width="15" height="17" rx="3.5" fill="#e0492f" stroke="#24365e" stroke-width="2"/>
+            <path d="M889,225 a5,5 0 0 1 0,9" fill="none" stroke="#24365e" stroke-width="2.5"/>
+
+            <!-- Data corner -->
+            <rect x="706" y="504" width="16" height="46" fill="#f4e5c9" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="900" y="504" width="16" height="46" fill="#f4e5c9" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="692" y="486" width="240" height="20" rx="10" fill="#f4e5c9" stroke="#24365e" stroke-width="3"/>
+            <rect x="712" y="424" width="86" height="58" rx="7" fill="#ffffff" stroke="#24365e" stroke-width="3"/>
+            <g class="mbars">
+              <rect x="726" y="452" width="10" height="20" fill="#e0492f" stroke="#24365e" stroke-width="1.2"/>
+              <rect x="740" y="444" width="10" height="28" fill="#f6c34d" stroke="#24365e" stroke-width="1.2"/>
+              <rect x="754" y="456" width="10" height="16" fill="#2f9469" stroke="#24365e" stroke-width="1.2"/>
+              <rect x="768" y="440" width="10" height="32" fill="#2f6fb8" stroke="#24365e" stroke-width="1.2"/>
+            </g>
+            <rect x="812" y="436" width="66" height="46" rx="7" fill="#ffffff" stroke="#24365e" stroke-width="3"/>
+            <circle cx="845" cy="459" r="13" fill="none" stroke="#e8f1fb" stroke-width="8"/>
+            <circle cx="845" cy="459" r="13" fill="none" stroke="#f6c34d" stroke-width="8" stroke-dasharray="50 32" transform="rotate(-90 845 459)"/>
+            <circle cx="845" cy="459" r="17.5" fill="none" stroke="#24365e" stroke-width="2"/>
+            <g transform="translate(936,540)">
+              <g class="leaves">
+                <path d="M14,20 C2,10 4,-6 14,-14 C24,-6 26,10 14,20" fill="#8fc9ad" stroke="#24365e" stroke-width="2.2"/>
+                <path d="M14,18 C10,6 18,0 24,-8" fill="none" stroke="#24365e" stroke-width="2"/>
+              </g>
+              <path d="M2,18 h24 l-4,26 h-16 Z" fill="#fdeae4" stroke="#24365e" stroke-width="2.4"/>
+            </g>
+
+            <!-- front desk -->
+            <rect x="110" y="452" width="230" height="76" rx="14" fill="#f4e5c9" stroke="#24365e" stroke-width="3"/>
+            <rect x="128" y="470" width="194" height="42" rx="9" fill="#fff" stroke="#24365e" stroke-width="2" stroke-dasharray="10 7"/>
+            <rect x="98" y="438" width="254" height="18" rx="9" fill="#ffffff" stroke="#24365e" stroke-width="3"/>
+            <circle cx="310" cy="430" r="8" fill="#f6c34d" stroke="#24365e" stroke-width="2.2"/>
+            <rect x="299" y="434" width="22" height="6" rx="3" fill="#fff" stroke="#24365e" stroke-width="2"/>
+            <g transform="translate(122,410)">
+              <g class="leaves"><path d="M10,22 C2,14 3,4 10,0 C17,4 18,14 10,22" fill="#8fc9ad" stroke="#24365e" stroke-width="2"/></g>
+              <rect x="3" y="20" width="14" height="10" rx="3" fill="#fdeae4" stroke="#24365e" stroke-width="2"/>
+            </g>
+
+            <!-- rug + phin coffee table -->
+            <rect x="380" y="304" width="240" height="148" rx="26" fill="#ffffff" stroke="#24365e" stroke-width="2.5"/>
+            <rect x="394" y="316" width="212" height="124" rx="20" fill="none" stroke="#8d9ab8" stroke-width="2.5" stroke-dasharray="12 9"/>
+            <circle cx="446" cy="418" r="12" fill="#fdeae4" stroke="#24365e" stroke-width="2.2"/>
+            <circle cx="556" cy="418" r="12" fill="#fdeae4" stroke="#24365e" stroke-width="2.2"/>
+            <circle cx="500" cy="370" r="36" fill="#f4e5c9" stroke="#24365e" stroke-width="3"/>
+            <rect x="490" y="352" width="20" height="13" rx="3" fill="#ffffff" stroke="#24365e" stroke-width="2.2"/>
+            <circle class="phindrop" cx="500" cy="349" r="2.2" fill="#24365e"/>
+            <rect x="488" y="344" width="24" height="7" rx="2.5" fill="#e8f1fb" stroke="#24365e" stroke-width="2"/>
+            <rect x="492" y="336" width="16" height="9" rx="2" fill="#ffffff" stroke="#24365e" stroke-width="2"/>
+            <circle cx="500" cy="334" r="2.5" fill="#24365e"/>
+            <g class="steam">
+              <path d="M494,328 q3,-6 0,-11" stroke="#8d9ab8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M506,328 q-3,-6 0,-11" stroke="#8d9ab8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+
+          <span class="ai-loc" style="left:30%; top:29%;">Research wall</span>
+          <span class="ai-loc" style="left:81%; top:44%;">Minh's desk</span>
+          <span class="ai-loc" style="left:81%; top:78.5%;">Data corner</span>
+
+          <div class="ai-agent a-hana" data-agent="hana"><span class="bub"></span><span class="shadow"></span><span class="person"></span><span class="tag">Hana · Front desk</span></div>
+          <div class="ai-agent a-vy" data-agent="vy"><span class="bub"></span><span class="shadow"></span><span class="person"></span><span class="tag">Vy · Research</span></div>
+          <div class="ai-agent a-minh" data-agent="minh"><span class="bub"></span><span class="shadow"></span><span class="person"></span><span class="tag tag-star">Hoàng Minh · PO/UX</span></div>
+          <div class="ai-agent a-kai" data-agent="kai"><span class="bub"></span><span class="shadow"></span><span class="person"></span><span class="tag">Kai · Data</span></div>
+          <div class="ai-agent a-guest" data-agent="visitor"><span class="bub"></span><span class="shadow"></span><span class="person"></span><span class="tag">You · Visitor</span></div>
+        </div>
+
+        <div class="ai-log">
+          <span class="lgface" id="aiLogFace"></span>
+          <span class="lgmid">
+            <span class="lg-t">HANDOFF LOG · A2A</span>
+            <span class="lg-list" id="aiLogList"></span>
+          </span>
+          <span class="ai-status" id="aiStatus">READY</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: doodle notes -->
+      <div class="ai-chat">
+        <span class="ai-secno chat"><span class="no">2</span><span class="tt">Ask the team</span></span>
+        <div class="ai-msgs" id="aiMsgs"></div>
+        <div class="ai-chips" id="aiChips"></div>
+        <form class="ai-inputrow" id="aiForm">
+          <input id="aiInput" type="text" maxlength="300" placeholder="Ask about Minh: PRD level, skills, projects, contact..." autocomplete="off" />
+          <button type="submit" id="aiSend" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   "use strict";
@@ -709,6 +1151,342 @@
     const hi=document.getElementById('fiHi'); if(hi){ hi.style.opacity=1; document.getElementById('fiFill').style.width='100%'; document.getElementById('fiRight').classList.remove('dim'); document.getElementById('fiLeft').classList.add('dim'); }
     drawTree(); addEventListener('resize',()=>drawTree());
   }
+})();
+</script>
+
+<script>
+/* ===== AI PRODUCT STUDIO v4 - doodle multi-agent orchestrator (offline knowledge, no API, EN only) ===== */
+(function(){
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const overlay=$('aiOverlay'), stage=$('aiStage'), msgs=$('aiMsgs'), chipsBox=$('aiChips'),
+        form=$('aiForm'), input=$('aiInput'), sendBtn=$('aiSend'),
+        statusEl=$('aiStatus'), logList=$('aiLogList'), logFace=$('aiLogFace'), teamBox=$('aiTeam'), hint=$('aiHint');
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- character art (doodle: ink outlines) ---------- */
+  const SKIN='#f6cda6', INK='#24365e';
+  const META={
+    hana:{ name:'Hana', role:'Facilitator', color:'#e0492f', shirt:'#e0492f',
+      back:'<path d="M14,15 Q13.5,3.8 25,3.8 Q36.5,3.8 36,15 L36.5,27 Q33,25 31.8,17.5 L18.2,17.5 Q17,25 13.5,27 Z" fill="#3a2a22" stroke="'+INK+'" stroke-width="1.3"/>',
+      front:'<path d="M15.6,13 Q17,6.4 25,6.2 Q33,6.4 34.4,13 Q29.5,10 25,10 Q20.5,10 15.6,13 Z" fill="#3a2a22"/>', extra:'', prop:'' },
+    vy:{ name:'Vy', role:'Researcher', color:'#2f9469', shirt:'#2f9469',
+      back:'', front:'<circle cx="25" cy="3.8" r="4" fill="#221712" stroke="'+INK+'" stroke-width="1.2"/><path d="M14.2,13.5 Q14.2,4.6 25,4.6 Q35.8,4.6 35.8,13.5 Q30,9 25,9 Q20,9 14.2,13.5 Z" fill="#221712" stroke="'+INK+'" stroke-width="1.2"/>', extra:'', prop:'' },
+    minh:{ name:'Hoàng Minh', role:'PO / UX', color:'#2f6fb8', shirt:'#33415e',
+      back:'', front:'<path d="M14.2,12.8 Q15,4.2 25,4.2 Q35,4.2 35.8,12.8 Q30.5,8 25,8 Q19.5,8 14.2,12.8 Z" fill="#181210" stroke="'+INK+'" stroke-width="1.2"/>',
+      extra:'<rect x="17.2" y="11.6" width="6.8" height="5.8" rx="2.9" fill="none" stroke="'+INK+'" stroke-width="1.5"/><rect x="26" y="11.6" width="6.8" height="5.8" rx="2.9" fill="none" stroke="'+INK+'" stroke-width="1.5"/><line x1="24" y1="14.3" x2="26" y2="14.3" stroke="'+INK+'" stroke-width="1.5"/>', prop:'' },
+    kai:{ name:'Kai', role:'Analyst', color:'#e8a33d', shirt:'#e8a33d',
+      back:'', front:'<path d="M14.4,13.2 Q14.4,4 25,4 Q35.6,4 35.6,13.2 Z" fill="#f6c34d" stroke="'+INK+'" stroke-width="1.3"/><rect x="14.4" y="11" width="21.2" height="3.6" rx="1.8" fill="#d99a26" stroke="'+INK+'" stroke-width="1.1"/>', extra:'', prop:'' },
+    visitor:{ name:'You', role:'Visitor', color:'#6f8fd8', shirt:'#6f8fd8',
+      back:'', front:'<path d="M14.4,13 Q14.8,4.4 25,4.4 Q35.2,4.4 35.6,13 Q32,7.6 26,7.4 Q24,7.4 22,8.2 Q17,8 14.4,13 Z" fill="#5a4030" stroke="'+INK+'" stroke-width="1.2"/>', extra:'',
+      prop:'<rect x="33.5" y="44" width="11" height="9" rx="2" fill="#8a5a36" stroke="'+INK+'" stroke-width="1.2"/><path d="M36.5,44 v-2 a2.5,2.5 0 0 1 5,0 v2" fill="none" stroke="'+INK+'" stroke-width="1.2"/>' }
+  };
+  function headGroup(a){ const m=META[a];
+    return m.back+
+      '<circle cx="25" cy="14" r="10.5" fill="'+SKIN+'" stroke="'+INK+'" stroke-width="1.4"/>'+
+      '<circle cx="21.4" cy="14.5" r="1.3" fill="'+INK+'"/><circle cx="28.6" cy="14.5" r="1.3" fill="'+INK+'"/>'+
+      '<path d="M21.8,18.6 Q25,21 28.2,18.6" fill="none" stroke="'+INK+'" stroke-width="1.3" stroke-linecap="round"/>'+
+      '<circle cx="18.4" cy="17.4" r="1.5" fill="#f2a48c" opacity=".6"/><circle cx="31.6" cy="17.4" r="1.5" fill="#f2a48c" opacity=".6"/>'+
+      m.front+m.extra; }
+  function personSVG(a){ const m=META[a];
+    return '<svg viewBox="0 0 48 60" xmlns="http://www.w3.org/2000/svg">'+
+      '<rect class="leg1" x="19.5" y="44" width="5" height="13" rx="2.5" fill="#33415e" stroke="'+INK+'" stroke-width="1"/>'+
+      '<rect class="leg2" x="25.5" y="44" width="5" height="13" rx="2.5" fill="#33415e" stroke="'+INK+'" stroke-width="1"/>'+
+      '<rect class="arm1" x="9" y="27" width="6" height="15" rx="3" fill="'+m.shirt+'" stroke="'+INK+'" stroke-width="1.2"/>'+
+      '<rect class="arm2" x="35" y="27" width="6" height="15" rx="3" fill="'+m.shirt+'" stroke="'+INK+'" stroke-width="1.2"/>'+
+      '<circle cx="12" cy="43" r="2.4" fill="'+SKIN+'" stroke="'+INK+'" stroke-width="1"/><circle cx="38" cy="43" r="2.4" fill="'+SKIN+'" stroke="'+INK+'" stroke-width="1"/>'+
+      (m.prop||'')+
+      '<rect x="13" y="25" width="24" height="21" rx="9" fill="'+m.shirt+'" stroke="'+INK+'" stroke-width="1.4"/>'+
+      '<rect x="22.4" y="30" width="5.2" height="6.5" rx="1.2" fill="#ffffff" stroke="'+INK+'" stroke-width=".8"/>'+
+      headGroup(a)+'</svg>'; }
+  function faceSVG(a){ return '<svg viewBox="11.5 0.5 27 27" xmlns="http://www.w3.org/2000/svg">'+headGroup(a)+'</svg>'; }
+
+  document.querySelectorAll('.ai-agent').forEach(el=>{ el.querySelector('.person').innerHTML=personSVG(el.dataset.agent); });
+  const TIPS={
+    hana:'Hana · Facilitator. Runs the front desk: greets you, triages your question and routes it to the right teammate.',
+    vy:'Vy · Researcher. Keeper of the research wall: pulls journeys, insights and context for every question.',
+    minh:'Ho\u00e0ng Minh · PO/UX. The studio owner and source of truth: every answer is grounded in his real work.',
+    kai:'Kai · Analyst. Lives in the data corner: turns answers into charts and tables when numbers tell it better.' };
+  ['hana','vy','kai','minh'].forEach(a=>{ const d=document.createElement('span'); d.className='fc'+(a==='minh'?' star':'');
+    d.setAttribute('data-tip', TIPS[a]); d.setAttribute('tabindex','0'); d.innerHTML=faceSVG(a); teamBox.appendChild(d); });
+  logFace.innerHTML=faceSVG('hana');
+
+  /* ---------- stage & movement ---------- */
+  const POS={ reception:[22.5,67.5], research:[18,41], desk:[65,42], data:[66,81], center:[48,62],
+              research_meet:[30.5,46], desk_meet:[55,47], data_meet:[54,84],
+              door:[2.5,57], mat:[9.5,60], approach:[10,86], vrest:[22.5,91],
+              hana_out:[36.5,76], visit_greet:[29,91] };
+  const agents={}; document.querySelectorAll('.ai-agent').forEach(el=>{ agents[el.dataset.agent]={el, at:null}; });
+  const HOME={ hana:'reception', vy:'research', minh:'desk', kai:'data', visitor:'door' };
+
+  function fastMode(){ return reduce || !stage || stage.offsetParent===null; }
+  function xy(st){ const r=stage.getBoundingClientRect(); return [r.width*POS[st][0]/100, r.height*POS[st][1]/100]; }
+  function place(name, st, jump){ const a=agents[name]; if(!a) return; a.at=st;
+    if(stage.offsetParent===null) return;
+    if(jump) a.el.classList.add('jump');
+    const [x,y]=xy(st); a.el.style.transform='translate('+x+'px,'+y+'px)';
+    if(jump) setTimeout(()=>a.el.classList.remove('jump'), 60); }
+  function placeAll(jump){ Object.keys(agents).forEach(n=>place(n, agents[n].at||HOME[n], jump)); }
+  window.addEventListener('resize', ()=>placeAll(true));
+  if(window.ResizeObserver){ new ResizeObserver(()=>placeAll(true)).observe(stage); }
+
+  const sleep = ms => new Promise(r=>setTimeout(r, fastMode()? Math.min(ms,120) : ms));
+  async function walk(name, st){ const a=agents[name];
+    if(fastMode()){ place(name, st, true); return; }
+    a.el.classList.add('walk'); place(name, st); await sleep(1380); a.el.classList.remove('walk'); }
+  async function walkVia(name, sts){ for(const st of sts){ await walk(name, st); } }
+  function bubble(name, text, hold){ const a=agents[name]; const b=a.el.querySelector('.bub'); if(!b) return;
+    b.innerHTML=text; b.classList.add('on'); a.el.classList.add('talk');
+    if(a.bubT) clearTimeout(a.bubT);
+    a.bubT=setTimeout(()=>{ b.classList.remove('on'); a.el.classList.remove('talk'); }, hold||2400); }
+  function log(agent, text){ const m=META[agent];
+    const d=document.createElement('div');
+    d.innerHTML='<span class="lgdot" style="background:'+m.color+'"></span><b>'+m.name+':</b> '+text;
+    logList.innerHTML=''; logList.appendChild(d); logFace.innerHTML=faceSVG(agent); }
+  function setStatus(s){ statusEl.textContent=s; }
+
+  /* ---------- chat ---------- */
+  function scrollBottom(){ msgs.scrollTop=msgs.scrollHeight; }
+  function postUser(t){ const m=document.createElement('div'); m.className='ai-m user'; m.textContent=t; msgs.appendChild(m); scrollBottom(); }
+  function postTyping(){ const m=document.createElement('div'); m.className='ai-m bot';
+    m.innerHTML='<span class="ai-typing"><i></i><i></i><i></i></span>'; msgs.appendChild(m); scrollBottom(); return m; }
+  async function typeInto(dst, srcNode){
+    for(const child of Array.from(srcNode.childNodes)){
+      if(child.nodeType===3){
+        const t=document.createTextNode(''); dst.appendChild(t); const str=child.nodeValue;
+        if(fastMode()){ t.nodeValue=str; continue; }
+        for(let i=0;i<str.length;i+=2){ t.nodeValue=str.slice(0,i+2);
+          if(i%16===0) scrollBottom();
+          await new Promise(r=>setTimeout(r,16)); }
+        t.nodeValue=str;
+      } else if(child.nodeType===1){
+        if(child.tagName==='TABLE' || child.classList.contains('ai-bars') || child.classList.contains('cap')){
+          const c=child.cloneNode(true); c.classList.add('fadein'); dst.appendChild(c); scrollBottom();
+          if(!fastMode()) await new Promise(r=>setTimeout(r,320));
+        } else {
+          const c=child.cloneNode(false); dst.appendChild(c); await typeInto(c, child);
+        }
+      }
+    }
+  }
+  async function fillBot(node, agent, html){ const m=META[agent];
+    node.style.setProperty('--who', m.color+'55');
+    node.innerHTML='<span class="who"><span class="fc">'+faceSVG(agent)+'</span><span><span class="wn">'+m.name+'</span> <span class="wr">'+m.role+'</span></span></span>';
+    const body=document.createElement('span'); node.appendChild(body);
+    const caret=document.createElement('span'); caret.className='ai-typecaret'; node.appendChild(caret);
+    const src=document.createElement('div'); src.innerHTML=html;
+    scrollBottom();
+    await typeInto(body, src);
+    caret.remove(); scrollBottom();
+    requestAnimationFrame(()=>{ node.querySelectorAll('.ai-bar .track i').forEach(i=>{ i.style.transform='scaleX('+(parseFloat(i.dataset.v)/100)+')'; }); }); }
+
+  /* ---------- knowledge database ---------- */
+  function barsHTML(rows, cap){ return '<div class="ai-bars">'+rows.map(r=>
+      '<div class="ai-bar"><span class="bl">'+r[0]+'</span><span class="track"><i data-v="'+r[1]+'"></i></span><span class="bv">'+r[1]+'</span></div>'
+    ).join('')+'</div>'+(cap?'<span class="cap">'+cap+'</span>':''); }
+  function tableHTML(head, rows){ return '<table class="ai-table"><thead><tr>'+head.map(h=>'<th>'+h+'</th>').join('')+
+      '</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table>'; }
+
+  const SKILL_ROWS=[['User research',92],['Journey mapping',90],['User stories & AC',88],['VPC / problem framing',86],['Usability & UAT',84],['Figma & prototyping',78],['Data & Python',72]];
+  const PROJ_ROWS=[
+    ['<b>EchoMind</b>','Product Owner','AI brain-to-text, Agile + RACI','55-65 WPM, &lt;1s latency, 100% milestones'],
+    ['<b>E-Reader Ecosystem</b>','Product Lead','HCI activation journey','Top 20 finalist (HCMC People\'s Committee)'],
+    ['<b>SIHUB</b>','PM Executive','Startup onboarding, insights, NPS','150+ stakeholders, Board reporting']];
+  const EXP_ROWS=[
+    ['2022 - 2026','<b>UEH University</b>','B. of Technology &amp; Innovation, GPA 3.57'],
+    ['Jul - Dec 2024','<b>SIHUB, R&amp;D Intern</b>','City-level study, 150+ stakeholders'],
+    ['Jan - Oct 2025','<b>SIHUB, PM Executive</b>','Startup journeys, A/B tests, Board reports'],
+    ['Sep - Dec 2025','<b>EchoMind, Product Owner</b>','Brain-to-text system, 100% milestones']];
+
+  /* ordered: specific before generic; a = author agent; chart = Kai builds a visual */
+  const DB=[
+    { re:/\bprd\b|product requirement/i, a:'minh',
+      h:'<b>PRD level:</b> Minh writes <b>feature-level PRDs end to end</b>: problem statement, goals and non-goals, user stories with acceptance criteria, flows, edge cases and success metrics. He also builds the <b>BRD baseline</b> and keeps a <b>requirement traceability matrix</b> so nothing gets lost on the way to UAT. For org-wide, multi-team PRDs he still asks for a senior review pass, which he sees as healthy at his stage. Proof: the Requirements section of this very portfolio.' },
+    { re:/\bbrd\b|business requirement/i, a:'minh',
+      h:'Minh writes <b>BRDs</b> with objective, scope (in and out), stakeholders, coded business requirements (BR-1, BR-2...) and success metrics, then links each BR to a story, its acceptance criteria and a UAT case through a <b>traceability matrix</b>. Scroll to the Requirements section of this page to see a live example.' },
+    { re:/user stor|acceptance criteria|gherkin|given.?when.?then/i, a:'minh',
+      h:'Minh writes user stories in the classic format (<b>As a... I want... so that...</b>) with <b>Gherkin acceptance criteria</b> (Given / When / Then) that double as UAT scenarios. He follows INVEST and prioritizes with MoSCoW or value-vs-effort. Three live examples sit in the Requirements section of this portfolio.' },
+    { re:/\buat\b|acceptance test|release gate/i, a:'minh',
+      h:'Minh plans <b>UAT</b> from the acceptance criteria: test scenarios, expected results, pass/fail runs with real users, defect logging and clarification with engineering, and a clear <b>release acceptance gate</b> (no blocking defects, all P1 scenarios pass). There is a UAT board with a live gate example on this page.' },
+    { re:/figma|wireframe|prototype|lo-?fi|hi-?fi|mockup|design tool|ui design|ux design|can .{0,12}design/i, a:'minh',
+      h:'Minh prototypes in <b>Figma</b>, moving from <b>lo-fi wireframes</b> (to test structure, flow and copy cheaply) to <b>hi-fi interactive prototypes</b> (to test hierarchy, trust and micro-interactions). His rule: test the cheap thing first. The lo-fi to hi-fi scroll animation on this page shows exactly that thinking.' },
+    { re:/research|interview|survey|usability test|user test|a\/?b test|field stud|discovery/i, a:'minh',
+      h:'Minh\'s research toolkit: <b>user interviews</b> (past behavior, no leading questions, 5 Whys), <b>surveys</b> for scale, <b>usability tests</b> with think-aloud (about 5 users per round), and <b>A/B or interleaving experiments</b> to decide with evidence. Qualitative finds the why, quantitative confirms how common it is.' },
+    { re:/english|language|ielts|toeic/i, a:'minh',
+      h:'Minh works comfortably in <b>English</b>: he reads and writes professional product documents (this entire portfolio, his BRDs and specs are in English) and communicates well in daily work. Vietnamese is his native language.' },
+    { re:/salary|compensation|pay rate|expected pay/i, a:'hana',
+      h:'Minh keeps salary open to discussion based on the role, scope and market. As an early-career hire he weighs <b>learning and ownership</b> heavily. Best to discuss specifics directly: <b>hwinh.work@gmail.com</b>.' },
+    { re:/relocat|remote|onsite|hybrid|location|where.*(live|based)|based in/i, a:'hana',
+      h:'Minh is based in <b>Ho Chi Minh City</b> and is open to onsite or hybrid work there. Feel free to ask him directly about specific arrangements: <b>hwinh.work@gmail.com</b>.' },
+    { re:/available|start date|when can.*(start|join)|notice period/i, a:'hana',
+      h:'Minh is a final-year student with a flexible schedule and can typically start within <b>1 to 2 weeks</b>. For exact timing, reach him at <b>hwinh.work@gmail.com</b>.' },
+    { re:/why (should|hire)|stand ?out|what makes.*(different|unique)/i, a:'minh',
+      h:'Three honest reasons: (1) he has already run <b>real product work end to end</b>, not just coursework: a Top 20 city-level product, a 150+ stakeholder research program, an AI build shipped at 100% milestones; (2) he bridges <b>research and delivery</b>: journey maps and VPCs on one side, BRDs, stories and UAT on the other; (3) he is <b>AI-first</b>, building his own agentic workflows to move faster. What he lacks in years he makes up in evidence.' },
+    { re:/weakness|improve yourself|biggest flaw/i, a:'minh',
+      h:'Honest answer: Minh tends to <b>research deeply before deciding</b>, which can slow him down. He manages it by timeboxing discovery and validating with cheap lo-fi tests instead of waiting for perfect data. He would rather ship a tested assumption than a polished guess.' },
+    { re:/echomind|brain.?to.?text/i, a:'minh',
+      h:'<b>EchoMind</b> (Sep - Dec 2025): an AI brain-to-text system where Minh was <b>Product Owner</b>. He ran the full lifecycle on Agile sprints with a RACI matrix, drove the move from a baseline model to a Transformer architecture, and hit <b>100% milestone completion</b> with measured results: <b>55-65 words per minute</b> decoding at <b>under 1 second</b> latency.' },
+    { re:/e-?reader|education ecosystem|digital education/i, a:'minh',
+      h:'<b>E-Reader &amp; Digital Education Ecosystem</b> (Mar - Jun 2025): Minh was <b>Product Lead</b>. He applied HCI principles to redesign the student activation journey (device provisioning to content updates), cutting cognitive load at onboarding, and decomposed pain points into a buildable feature set. Result: <b>Top 20 finalist</b>, directed by the HCMC People\'s Committee.' },
+    { re:/sihub|innovation hub|incubat/i, a:'minh',
+      h:'<b>SIHUB</b> (Jul 2024 - Oct 2025): the Startup &amp; Innovation Hub of HCMC. Minh grew from R&amp;D Intern to <b>PM Executive</b>: he owned startup onboarding journeys, collected founder insights, ran A/B and interleaving experiments, led a city-level study across <b>150+ stakeholders</b>, and reported directly to the Board of Directors.' },
+    { re:/\bnps\b|metric|kpi|retention|activation rate|measure success/i, a:'minh',
+      h:'Minh defines metrics <b>before</b> building: activation rate and setup time for onboarding, D7/D30 <b>retention</b> for habit, task success rate for usability, and <b>NPS</b> for satisfaction. At SIHUB he turned scattered feedback into an NPS view reported to the Board. Success thresholds go straight into acceptance criteria.' },
+    { re:/hci|heuristic|nielsen|cognitive load|usability principle/i, a:'minh',
+      h:'Minh\'s HCI lens, applied to every flow: <b>reduce cognitive load</b>, recognition over recall, visible feedback, consistency, error prevention, and matching the real world. It comes from his university specialization and shows up in the E-Reader activation redesign. The HCI section of this page lists all six with examples.' },
+    { re:/design system|design token|component librar/i, a:'minh',
+      h:'Minh understands <b>design systems</b> at working level: tokens (color, type, spacing) feeding components with defined states, and patterns assembled from them. He applies that thinking in Figma and in this portfolio\'s own consistent system. Building an org-scale system he would do alongside a senior designer.' },
+    { re:/team|collaborat|stakeholder|communicat|conflict/i, a:'minh',
+      h:'Minh\'s collaboration record: primary touchpoint for founders at SIHUB, coordinating <b>150+ stakeholders</b> in a city-level study, milestone reviews with technical teams and mentors, and <b>reporting to the Board of Directors</b>. His habit in conflict: replace opinion battles with cheap evidence (a quick test beats a long argument).' },
+    { re:/lead(ership)?|ownership|initiative/i, a:'minh',
+      h:'Minh has led end to end twice: <b>Product Owner on EchoMind</b> (100% milestones, RACI-driven sprints) and <b>Product Lead on the E-Reader ecosystem</b> (Top 20 finalist). His style: clear ownership per task, evidence over authority, and keeping the thread alive until release.' },
+    { re:/agile|scrum|sprint|kanban|raci|backlog/i, a:'minh',
+      h:'Minh runs <b>Agile/Scrum</b>: sprint planning, disciplined execution, milestone reviews, and a <b>RACI matrix</b> so ownership is never ambiguous. He maintains the product backlog with MoSCoW/value-effort prioritization and keeps a change log for scope moves.' },
+    { re:/notion|jira|what tools|tool ?stack|software.*(use|know)/i, a:'minh',
+      h:'Daily tools: <b>Figma</b> (wireframes to hi-fi prototypes), <b>Notion</b> (docs and backlog), <b>Python + Google Colab</b> (data analysis), spreadsheets for trackers and RTMs, and <b>Claude/LLM agents</b> for AI-first workflows. He picks the lightest tool that keeps the team aligned.' },
+    { re:/\bai\b|agent|prompt|claude|gpt|llm|automation/i, a:'minh',
+      h:'Minh works <b>AI-first</b>. He built a custom Claude skill that writes concept-based specs through 7 guided sprints, asking what/why questions each sprint so the AI absorbs the real workflow, then packaged it as a reusable command. This very studio, a multi-agent handoff with triage, research, knowledge and visualization roles, is his own design.' },
+    { re:/skill|chart|strength|kỹ năng|ky nang|biểu đồ|bieu do|điểm mạnh/i, a:'kai', chart:true,
+      h:'Here is Minh\'s core skill profile:'+barsHTML(SKILL_ROWS,'Self-assessment, calibrated against real project work.') },
+    { re:/project|compare|portfolio piece|dự án|du an|so sánh|so sanh|table|bảng/i, a:'kai', chart:true,
+      h:'Three projects Minh led, side by side:'+tableHTML(['Project','Role','Focus','Result'],PROJ_ROWS) },
+    { re:/experience|timeline|career|work history|kinh nghiệm|kinh nghiem/i, a:'kai', chart:true,
+      h:'Minh\'s path so far:'+tableHTML(['When','Where','What'],EXP_ROWS) },
+    { re:/education|gpa|university|ueh|degree|coursework|học vấn|hoc van|trường/i, a:'minh',
+      h:'<b>University of Economics HCMC (UEH)</b>, Bachelor of Technology and Innovation, Aug 2022 - Aug 2026, <b>GPA 3.57/4.0</b>. Coursework: Design Thinking, HCI, Innovation Management, Business Intelligence, Digital Business Transformation.' },
+    { re:/certificat|google (pm|ux|project)|chứng chỉ|chung chi/i, a:'minh',
+      h:'Certifications: <b>Google Project Management</b>, <b>Google UX Design Specialization</b>, <b>Agile Management</b>.' },
+    { re:/design process|process|design thinking|methodolog|quy trình|quy trinh|workflow/i, a:'minh',
+      h:'Minh runs a full <b>Design Thinking loop</b>: Empathize (interviews, journey maps) &rarr; Define (problem tree) &rarr; Ideate (VPC, user stories with acceptance criteria) &rarr; Prototype (lo-fi to hi-fi) &rarr; Test (usability, A/B, UAT). Scroll this page: every step is a live artifact.' },
+    { re:/journey|vpc|value proposition|problem tree|traceab|artifact|persona|portfolio/i, a:'minh',
+      h:'This portfolio is itself Minh\'s UX evidence: a <b>journey map</b> with an emotion curve, a <b>problem tree</b>, <b>VPC fit pairs</b>, a <b>BRD with a traceability matrix</b>, <b>user stories</b> in Given/When/Then, a <b>lo-fi to hi-fi</b> transition and a <b>UAT board</b>. Close this window and scroll to see them animated.' },
+    { re:/contact|email|phone|reach|hire|liên hệ|lien he/i, a:'hana',
+      h:'Reach Minh at <b>hwinh.work@gmail.com</b> or <b>+84 765 828 191</b> (Ho Chi Minh City). AI chatbot portfolio: <b>hwinh-portfolio.streamlit.app</b>. He is open to UX research, CX and product roles.' },
+    { re:/intro|who is|about (minh|him)|yourself|giới thiệu|gioi thieu|là ai|la ai/i, a:'minh',
+      h:'<b>Minh</b> is a final-year Technology &amp; Innovation student (UEH, GPA 3.57) specializing in <b>UX research and product discovery</b>. He turns user behavior into journey maps, value propositions and buildable user stories, then validates with testing. Highlights: <b>Top 20 city finalist</b> (E-Reader ecosystem), <b>150+ stakeholders</b> coordinated at SIHUB, and an AI brain-to-text build shipped at <b>100% milestones</b>.' }
+  ];
+  const FALLBACK={ a:'hana',
+    h:'I have not indexed that one yet. Try a sticky note below, or ask about Minh\'s <b>PRD/BRD writing, user stories, UAT, research methods, Figma, projects, skills, metrics, teamwork, availability or contact</b>.' };
+  function lookup(q){ for(const e of DB){ if(e.re.test(q)) return e; } return (q.trim().length<4)? DB[DB.length-1] : FALLBACK; }
+
+  /* ---------- orchestration (slower pace, staggered bubbles) ---------- */
+  let busy=false, opened=false, entryP=null, idleTimer=null, idleOn=false;
+  const T={
+    triage:'Got it. Classifying the question...',
+    handoff:'Vy, can you pull context on this?',
+    research:'On it. Checking the research wall...',
+    ask:'Minh, need your input here.',
+    know:'Here is the full context.',
+    build:'Charting the numbers...',
+    done:'Answer is ready for you.'
+  };
+
+  function clearIdle(){ if(idleTimer){ clearTimeout(idleTimer); idleTimer=null; }
+    if(idleOn){ idleOn=false; stage.classList.remove('idlework');
+      ['hana','vy','minh','kai'].forEach(a=>agents[a].el.classList.remove('work')); } }
+  function armIdle(){ if(idleTimer) clearTimeout(idleTimer); idleTimer=setTimeout(goIdle, 15000); }
+  async function goIdle(){
+    if(busy || idleOn || !overlay.classList.contains('open')) return;
+    idleOn=true; setStatus('BREAK');
+    await walkVia('hana',['hana_out','visit_greet']); if(!idleOn) return;
+    bubble('hana','Anything else you would like to know?',3200); log('hana','Anything else you would like to know?');
+    await sleep(2600); if(!idleOn) return;
+    await Promise.all([
+      (async()=>{ await walk('hana','hana_out'); if(!idleOn) return; await walk('hana','reception'); })(),
+      walk('vy','research'), walk('minh','desk'), walk('kai','data')
+    ]); if(!idleOn) return;
+    setStatus('WORKING'); stage.classList.add('idlework');
+    ['vy','minh','kai'].forEach(a=>agents[a].el.classList.add('work'));
+    log('minh','Back to the prototype...');
+  }
+
+  async function orchestrate(q){
+    if(entryP){ await entryP; }
+    if(busy) return; busy=true; sendBtn.disabled=true; clearIdle();
+    const entry=lookup(q);
+    postUser(q);
+    const typing=postTyping();
+
+    setStatus('TRIAGE'); bubble('hana', T.triage, 2200); log('hana', T.triage);
+    await sleep(1400);
+
+    await walkVia('hana',['center','research_meet']);
+    setStatus('CONTEXT'); bubble('hana', T.handoff, 2000); log('hana', T.handoff);
+    await sleep(2100);
+    bubble('vy', T.research, 2000); log('vy', T.research);
+    await sleep(1300);
+
+    await walk('vy','desk_meet');
+    setStatus('KNOWLEDGE'); bubble('vy', T.ask, 1700); log('vy', T.ask);
+    await sleep(1800);
+    bubble('minh', T.know, 2000); log('minh', T.know);
+    await sleep(1400);
+
+    if(entry.chart){
+      await walk('vy','data_meet');
+      setStatus('BUILDING'); await sleep(300);
+      bubble('kai', T.build, 2400); log('kai', T.build);
+      await sleep(1500);
+    }
+
+    walk('vy','research');
+    await walkVia('hana',['center','reception']);
+    setStatus('READY'); bubble('hana', T.done, 2800); log('hana', T.done);
+
+    await fillBot(typing, entry.a, entry.h);
+    busy=false; sendBtn.disabled=false; input.focus(); armIdle();
+  }
+
+  /* ---------- visitor entry ---------- */
+  async function entrySeq(){
+    busy=true; sendBtn.disabled=true; setStatus('WELCOME');
+    await sleep(500);
+    await walk('visitor','mat');
+    await walk('visitor','approach');
+    await walk('visitor','vrest');
+    bubble('visitor','Hi! I would love to learn about Minh.',2600); log('visitor','Hi! I would love to learn about Minh.');
+    await sleep(2200);
+    bubble('hana','Welcome in! Tap a sticky note below, or just ask.',2800); log('hana','Welcome in! Tap a sticky note below.');
+    await sleep(1400);
+    setStatus('READY'); busy=false; sendBtn.disabled=false; armIdle();
+    entryP=null;
+  }
+
+  /* ---------- chips ---------- */
+  const CHIPS=[
+    ['About Minh','Introduce Minh, who is he?'],
+    ['Skills chart','Show me a chart of Minh\'s skills'],
+    ['Compare 3 projects','Compare Minh\'s three projects in a table'],
+    ['PRD & BRD','Which level of PRD can Minh write?'],
+    ['AI workflow','How does Minh use AI?'],
+    ['Contact','How can I contact Minh?']
+  ];
+  CHIPS.forEach(([label,q])=>{ const b=document.createElement('button'); b.type='button'; b.className='ai-chip'; b.textContent=label;
+    b.addEventListener('click',()=>orchestrate(q)); chipsBox.appendChild(b); });
+
+  /* ---------- open / close ---------- */
+  function greet(){ if(opened) return; opened=true;
+    const m=postTyping();
+    setTimeout(()=>{ fillBot(m,'hana',
+      'Hi, welcome to <b>hwinh\'s Product Studio</b>! Four of us work here: I run the front desk, <b>Vy</b> researches, <b>Hoàng Minh</b> owns the knowledge and <b>Kai</b> draws the charts. Pick a sticky note below, or just ask.'); }, fastMode()?150:800);
+    log('hana','Studio online. A guest is at the door.');
+    entryP=entrySeq();
+  }
+  function open(){ overlay.classList.add('open'); document.body.style.overflow='hidden';
+    if(hint) hint.classList.add('off');
+    requestAnimationFrame(()=>{ placeAll(true); }); setTimeout(()=>placeAll(true),120); greet(); if(!busy) armIdle(); setTimeout(()=>input.focus(),350); }
+  function close(){ overlay.classList.remove('open'); document.body.style.overflow=''; clearIdle(); }
+
+  $('aiFab').addEventListener('click', open);
+  if(hint) hint.addEventListener('click', open);
+  const navOpen=$('aiNavOpen'); if(navOpen) navOpen.addEventListener('click', e=>{ e.preventDefault(); open(); });
+  $('aiClose').addEventListener('click', close);
+  overlay.addEventListener('click', e=>{ if(e.target===overlay) close(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('open')) close(); });
+
+  form.addEventListener('submit', e=>{ e.preventDefault(); const q=input.value.trim(); if(!q) return; if(busy && !entryP) return; input.value=''; orchestrate(q); });
+
+  placeAll(true);
 })();
 </script>
 </body>
