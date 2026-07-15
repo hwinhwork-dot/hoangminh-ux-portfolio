@@ -270,7 +270,7 @@
   @media(prefers-reduced-motion: reduce){ .reveal,.rfade{ opacity:1; transform:none; } html{ scroll-behavior:auto; } .fcard{ transform:none !important; } }
 
   /* ===== AI PRODUCT STUDIO v4 (hand-drawn doodle) ===== */
-  .ai-overlay, .ai-fab, .ai-hint{
+  .ai-overlay, .ai-fab, .ai-hint, .ai-herobtn, .ai-promo{
     --dk:#24365e; --dk2:#3a4f80; --yel:#f6c34d; --yelsoft:#fdf1cf; --blu:#2f6fb8; --blusoft:#e8f1fb;
     --redd:#e0492f; --redsoft:#fdeae4; --grn:#2f9469; --grnsoft:#eaf6ee; --paperw:#fdfcf7;
     --wob1:255px 15px 225px 15px / 15px 225px 15px 255px;
@@ -532,7 +532,60 @@
     .ai-shell{ max-height:94vh; }
     .ai-team{ display:none; }
   }
+  /* ---- discovery: hero button, promo strip, richer FAB ---- */
+  .fcl{ display:inline-flex; align-items:center; }
+  .fcl .fcm{ width:26px; height:26px; border-radius:50%; background:#fff; border:2px solid var(--dk); margin-left:-8px; overflow:hidden; }
+  .fcl .fcm:first-child{ margin-left:0; }
+  .fcl .fcm svg{ width:100%; height:100%; display:block; border-radius:50%; }
+  .ai-herobtn{ background:var(--yel); color:var(--dk); border:2.5px solid var(--dk); border-radius:var(--wob1);
+    font-family:'Patrick Hand',cursive; font-size:1.12rem; font-weight:700; gap:11px;
+    box-shadow:4px 5px 0 rgba(36,54,94,.85); animation:aiNudge 5s ease-in-out 2s infinite; }
+  .ai-herobtn:hover{ transform:translateY(-3px) rotate(-1deg); box-shadow:6px 8px 0 rgba(36,54,94,.85); }
+  @keyframes aiNudge{ 0%,82%,100%{ transform:none;} 85%{ transform:translateY(-6px) rotate(-1.6deg);} 89%{ transform:translateY(0) rotate(1deg);} 93%{ transform:translateY(-3px);} 96%{ transform:none;} }
+  .ai-navdot{ display:inline-block; width:7px; height:7px; border-radius:50%; background:#f6c34d; border:1.5px solid #24365e;
+    margin-left:5px; vertical-align:6px; animation:aipulse 2s ease-in-out infinite; }
+  .ai-promo{ padding:6px 0 30px; }
+  .ai-promo-card{ display:flex; align-items:center; gap:22px; background:#fff; border:2.5px solid var(--dk);
+    border-radius:var(--wob2); padding:20px 26px; box-shadow:5px 6px 0 rgba(36,54,94,.25); transform:rotate(-.5deg);
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease); }
+  .ai-promo-card:hover{ transform:rotate(0) translateY(-3px); box-shadow:6px 9px 0 rgba(36,54,94,.3); }
+  .ai-promo-card .fcm{ width:44px; height:44px; border-width:2.5px; margin-left:-12px; }
+  .ai-promo-card .fcm:first-child{ margin-left:0; }
+  .ai-promo-card h3{ font-family:'Caveat',cursive; font-size:1.7rem; font-weight:700; color:var(--dk); line-height:1.05; }
+  .ai-promo-card p{ font-size:1.02rem; color:#41507a; margin-top:3px; line-height:1.4; }
+  .ai-promo-card .pt{ flex:1; min-width:0; }
+  .ai-promo-btn{ font-family:inherit; font-size:1.08rem; font-weight:700; color:var(--dk); background:var(--yel);
+    border:2.5px solid var(--dk); border-radius:var(--wob1); padding:12px 20px; cursor:pointer; white-space:nowrap;
+    box-shadow:3px 4px 0 rgba(36,54,94,.7); transition:.2s var(--ease); }
+  .ai-promo-btn:hover{ transform:translateY(-2px) rotate(-1deg); box-shadow:5px 7px 0 rgba(36,54,94,.7); }
+  .ai-promo-btn .ar{ display:inline-block; transition:transform .2s var(--ease); }
+  .ai-promo-btn:hover .ar{ transform:translateX(4px); }
+  @media(max-width:760px){ .ai-promo-card{ flex-direction:column; text-align:center; } .ai-promo-card .pt{ width:100%; } }
+  .ai-fab{ padding:11px 20px 11px 13px; gap:10px; }
+  .ai-fab .fab-txt{ font-size:1.12rem; }
+  .ai-fab{ animation:aiNudge 6s ease-in-out 3s infinite; }
+  .ai-hint{ animation:aiHintIn .5s var(--ease) 1s backwards, aiHintBob 2.6s ease-in-out 1.6s infinite; }
+  @keyframes aiHintIn{ from{ opacity:0; transform:rotate(-2deg) translateY(14px) scale(.9);} to{ opacity:1; transform:rotate(-2deg);} }
+  @keyframes aiHintBob{ 0%,100%{ transform:rotate(-2deg) translateY(0);} 50%{ transform:rotate(-2deg) translateY(-6px);} }
+  .ai-hint.off{ animation:none !important; }
+
+  /* ---- scroll-controlled FAB & hint (appear only past the promo strip) ---- */
+  .ai-fab{ opacity:0; pointer-events:none; transform:translateY(26px) scale(.92); animation:none;
+    transition:opacity .4s ease, transform .55s cubic-bezier(.34,1.56,.64,1); }
+  .ai-fab.on{ opacity:1; pointer-events:auto; transform:none; animation:aiNudge 6s ease-in-out 2.5s infinite; }
+  .ai-hint{ opacity:0; pointer-events:none; transform:rotate(-2deg) translateY(16px); animation:none;
+    transition:opacity .4s ease .12s, transform .55s cubic-bezier(.34,1.56,.64,1) .12s; }
+  .ai-hint.on{ opacity:1; pointer-events:auto; transform:rotate(-2deg); animation:aiHintBob 2.6s ease-in-out .8s infinite; }
+  .ai-hint.off{ opacity:0 !important; pointer-events:none !important; animation:none !important; }
+  .ai-promo{ padding:14px 0 40px; }
+  .ai-connector{ width:60px; margin:20px auto 0; }
+  .ai-connector svg{ display:block; width:100%; height:auto; }
+  .ai-connector .flow{ animation:aiFlowDown 1.4s linear infinite; }
+  @keyframes aiFlowDown{ to{ stroke-dashoffset:-14; } }
+
   @media(prefers-reduced-motion: reduce){
+    .ai-herobtn, .ai-hint, .ai-navdot, .ai-connector .flow{ animation:none !important; }
+    .ai-fab{ opacity:1; pointer-events:auto; transform:none; }
     .ai-agent,.ai-agent .person{ transition:none; animation:none !important; }
     .ai-agent.walk .leg1,.ai-agent.walk .leg2,.ai-agent.work .arm1,.ai-agent.work .arm2{ animation:none; }
     .ai-fab{ animation:none; } .ai-fab .dot,.steam path,.mbars rect,.leaves,.phindrop,.lantern,.sunrays,.moonhalo,.astar,.glowpulse{ animation:none !important; }
@@ -554,7 +607,7 @@
       <a href="#requirements">Requirements</a>
       <a href="#testing">Testing</a>
       <a href="#about">About</a>
-      <a href="#" id="aiNavOpen">AI Studio</a>
+      <a href="#" id="aiNavOpen">AI Team<span class="ai-navdot"></span></a>
       <a href="#contact" class="nav-cta">Get in touch</a>
     </div>
   </div>
@@ -576,7 +629,7 @@
         </div>
         <div class="cta-row">
           <a href="#process" class="btn btn-primary">See my process <span class="arrow">↗</span></a>
-          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          <button type="button" id="aiHeroOpen" class="btn ai-herobtn"><span class="fcl hb-faces"></span> Meet my AI team</button>
         </div>
       </div>
       <div class="hero-stage" id="stage" aria-hidden="true">
@@ -590,6 +643,26 @@
 </header>
 
 <!-- PROCESS -->
+<!-- AI TEAM PROMO -->
+<section class="ai-promo" id="ai-promo">
+  <div class="wrap">
+    <div class="ai-promo-card" data-rise>
+      <span class="fcl pf" id="aiPromoFaces"></span>
+      <div class="pt">
+        <h3>Don't read alone. Ask my AI team.</h3>
+        <p>Four hand-drawn agents answer live: skills charts, project tables, PRD samples, anything about Minh.</p>
+      </div>
+      <button type="button" id="aiPromoOpen" class="ai-promo-btn">Open the studio <span class="ar">&rarr;</span></button>
+    </div>
+    <div class="ai-connector" aria-hidden="true">
+      <svg viewBox="0 0 60 116" xmlns="http://www.w3.org/2000/svg">
+        <path class="flow" d="M30,4 C16,28 44,44 30,66 C22,79 30,88 30,96" fill="none" stroke="#24365e" stroke-width="2.6" stroke-dasharray="7 7" stroke-linecap="round"/>
+        <path d="M21,95 L30,108 L39,95" fill="none" stroke="#24365e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="process">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -896,7 +969,7 @@
 </main>
 
 <!-- ===== AI PRODUCT STUDIO ===== -->
-<button class="ai-fab" id="aiFab" type="button" aria-haspopup="dialog"><span class="dot"></span> AI Studio</button>
+<button class="ai-fab" id="aiFab" type="button" aria-haspopup="dialog"><span class="fcl" id="aiFabFaces"></span><span class="fab-txt">Join AI Studio</span><span class="dot"></span></button>
 <div class="ai-hint" id="aiHint" aria-hidden="true">Meet my AI team!</div>
 
 <div class="ai-overlay" id="aiOverlay" role="dialog" aria-modal="true" aria-label="hwinh's Product Studio, multi-agent assistant">
@@ -1574,7 +1647,7 @@
     entryP=entrySeq();
   }
   function open(){ overlay.classList.add('open'); document.body.style.overflow='hidden';
-    if(hint) hint.classList.add('off'); dnStart();
+    if(hint){ hint.classList.add('off'); hint.classList.remove('on'); } dnStart();
     requestAnimationFrame(()=>{ placeAll(true); }); setTimeout(()=>placeAll(true),120); greet(); if(!busy) armIdle(); setTimeout(()=>input.focus(),350); }
   function close(){ overlay.classList.remove('open'); document.body.style.overflow=''; clearIdle(); dnStop(); }
 
@@ -1640,6 +1713,25 @@
   function dnStop(){ if(DNC.raf){ cancelAnimationFrame(DNC.raf); DNC.raf=null; }
     if(DNC.iv){ clearInterval(DNC.iv); DNC.iv=null; } }
   window.__dnJump=function(ph){ DNC.start=performance.now()-ph*DNC.cycle; dnApply(performance.now()); };
+
+  /* FAB + hint appear only after the promo strip scrolls out of view (upward) */
+  const fabEl=$('aiFab'), promoSec=document.getElementById('ai-promo');
+  function fabShow(){ fabEl.classList.add('on');
+    if(hint && !hint.classList.contains('off')) hint.classList.add('on'); }
+  function fabHide(){ fabEl.classList.remove('on'); if(hint) hint.classList.remove('on'); }
+  function fabSync(){ if(!promoSec){ fabEl.classList.add('on'); return; }
+    const r=promoSec.getBoundingClientRect();
+    if(r.bottom < 0){ fabShow(); } else { fabHide(); } }
+  window.addEventListener('scroll', fabSync, {passive:true});
+  window.addEventListener('resize', fabSync);
+  fabSync();
+
+  function faceCluster(el){ if(!el) return; ['hana','vy','kai','minh'].forEach(a=>{
+    const c=document.createElement('span'); c.className='fcm'; c.innerHTML=faceSVG(a); el.appendChild(c); }); }
+  faceCluster($('aiFabFaces')); faceCluster($('aiPromoFaces'));
+  faceCluster(document.querySelector('#aiHeroOpen .hb-faces'));
+  const heroOpen=$('aiHeroOpen'); if(heroOpen) heroOpen.addEventListener('click', open);
+  const promoOpen=$('aiPromoOpen'); if(promoOpen) promoOpen.addEventListener('click', open);
 
   placeAll(true);
 })();
