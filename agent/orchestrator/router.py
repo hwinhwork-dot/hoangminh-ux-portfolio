@@ -75,7 +75,7 @@ RULES: list[tuple[str, Intent, str, bool]] = [
      Intent.PROFILE, "collaboration stakeholders Board reporting leadership ownership conflict evidence", False),
     (r"metric|\bkpi\b|\bnps\b|retention|activation|measure success",
      Intent.ARTIFACT, "metrics activation retention task success NPS thresholds acceptance criteria", False),
-    (r"contact|email|phone|reach|hire him|\bcv\b|resume",
+    (r"contact|email|phone|reach|get in touch|touch base|hire (him|her|them)|\bcv\b|resume|liên hệ|lien he",
      Intent.CONTACT, "contact email phone open to roles", False),
     (r"available|start date|when can.*(start|join)|notice period|relocat|remote|onsite|hybrid|based in",
      Intent.LOGISTICS, "availability start date location onsite hybrid Ho Chi Minh City", False),
