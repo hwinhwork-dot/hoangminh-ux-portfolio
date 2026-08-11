@@ -23,7 +23,7 @@ PROJECTS = [
     ["<b>ViVi · VinFast</b>", "Product Owner · UI/UX", "Multi-agent booking assistant",
      "Agent + web UI + admin, guarded"],
     ["<b>EchoMind</b>", "Product Owner", "AI brain-to-text, Agile + RACI",
-     "55-65 WPM, &lt;1s latency, 100% milestones"],
+     "55-65 WPM, <1s latency, 100% milestones"],
     ["<b>E-Reader Ecosystem</b>", "Product Lead", "HCI activation journey",
      "Top 20 finalist (HCMC People's Committee)"],
     ["<b>SIHUB</b>", "PM Executive", "Startup onboarding, insights, NPS",
@@ -31,11 +31,11 @@ PROJECTS = [
 ]
 
 TIMELINE = [
-    ["2022 - 2026", "<b>UEH University</b>", "B. of Technology &amp; Innovation, GPA 3.57"],
-    ["Jul - Dec 2024", "<b>SIHUB, R&amp;D Intern</b>", "City-level study, 150+ stakeholders"],
+    ["2022 - 2026", "<b>UEH University</b>", "B. of Technology & Innovation, GPA 3.57"],
+    ["Jul - Dec 2024", "<b>SIHUB, R&D Intern</b>", "City-level study, 150+ stakeholders"],
     ["Jan - Oct 2025", "<b>SIHUB, PM Executive</b>", "Startup journeys, A/B tests, Board reports"],
     ["Sep - Dec 2025", "<b>EchoMind, Product Owner</b>", "Brain-to-text, 100% milestones"],
-    ["Jul 2026 - now", "<b>VinGroup, AI Talent</b>", "AI products end to end; PO &amp; UI/UX on ViVi"],
+    ["Jul 2026 - now", "<b>VinGroup, AI Talent</b>", "AI products end to end; PO & UI/UX on ViVi"],
 ]
 
 _TIMELINE_WORDS = ("experience", "timeline", "career", "history", "kinh nghi")

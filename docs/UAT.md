@@ -100,6 +100,12 @@ worked on the first try — and `/api/health` immediately showed the agent was e
 | D-39 | Major | **Vietnamese questions were refused in production but worked locally.** With no key there is no dense retrieval, and a Vietnamese question shares no vocabulary with an English corpus — so the floor, correctly measured against the visitor's own words (D-23), found nothing. A matched routing rule now licenses a second pass scored against the rule's translation; it is gated on the rule so it cannot reopen D-23 | **Fixed** |
 | D-40 | Minor | The grader failed a third time on spelling rather than substance ("low-fidelity" vs "lo-fi"). Hyphenation is now folded centrally, and genuine synonyms moved to `expected_keywords_any` — the two problems that were hiding behind one symptom | **Fixed** |
 
+| D-41 | Major | **A recruiter saw the literal text `&lt;1s` in Kai's comparison table.** Cells were escaped only when they contained no `<b>`, so hand-written entities in plain cells were escaped twice while the same entities inside bold cells rendered fine — the same data, two behaviours, and no way for the author to know which branch applied. Escaping is now unconditional with `<b>` restored afterwards; row data is plain text | **Fixed** |
+
+D-41 was visible on the live site and no test caught it, because every test asserted on
+the markup rather than on what the markup renders as. The new ones check for
+double-escaping directly.
+
 D-39 is the one worth remembering: it existed only in the configuration production
 actually had. Local runs had a key, so dense retrieval quietly covered the gap, and no
 test would have found it. `/api/health` did, in one request.

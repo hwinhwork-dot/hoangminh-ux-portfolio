@@ -12,8 +12,19 @@ from html import escape
 
 
 def _cell(value: str) -> str:
-    """Row content is authored in the knowledge base and may carry <b>; nothing else."""
-    return value if value.startswith("<b>") or "</b>" in value else escape(value, quote=False)
+    """Escape everything, then allow back exactly one tag: <b>.
+
+    The previous version escaped a cell only when it contained no `<b>`, which meant the
+    author had to know which branch their string would take before deciding whether to
+    pre-escape it. They could not, and the result reached production: "&lt;1s latency"
+    was escaped a second time and a recruiter saw the literal text `&lt;1s`, while
+    "R&amp;D" in a bold cell rendered correctly — the same data, two behaviours.
+
+    Escaping unconditionally and restoring `<b>` afterwards removes the choice. Row data
+    is now plain text with `<b>` where bold is wanted; `<` and `&` are just characters.
+    """
+    escaped = escape(value, quote=False)
+    return escaped.replace("&lt;b&gt;", "<b>").replace("&lt;/b&gt;", "</b>")
 
 
 def build_bars(rows: list[tuple[str, int]], caption: str = "") -> str:

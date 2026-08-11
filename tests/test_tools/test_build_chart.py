@@ -43,3 +43,28 @@ def test_project_and_timeline_rows_are_rectangular():
 
 def test_captions_are_escaped():
     assert "<b>" not in build_bars([("x", 1)], caption="<b>evil</b>")
+
+
+# --- escaping happens exactly once ------------------------------------------
+def test_special_characters_are_escaped_once_not_twice():
+    """Regression from production: a recruiter saw the literal text `&lt;1s`.
+
+    Cells were escaped only when they contained no `<b>`, so hand-written entities in
+    plain cells were escaped a second time while the same entities inside bold cells
+    rendered fine. Row data is plain text now; `<` and `&` are just characters.
+    """
+    html = build_table(["A"], [["55-65 WPM, <1s latency"], ["R&D Intern"]])
+    assert "&lt;1s" in html and "&amp;lt;" not in html
+    assert "R&amp;D" in html and "&amp;amp;" not in html
+
+
+def test_bold_survives_but_every_other_tag_does_not():
+    html = build_table(["A"], [["<b>keep</b>"], ["<i>drop</i>"], ["<script>x</script>"]])
+    assert "<b>keep</b>" in html
+    assert "<i>" not in html and "<script>" not in html
+
+
+def test_no_double_escaping_anywhere_in_the_shipped_tables():
+    for head, rows in ((["a", "b", "c", "d"], PROJECTS), (["a", "b", "c"], TIMELINE)):
+        html = build_table(head, rows)
+        assert "&amp;amp;" not in html and "&amp;lt;" not in html
