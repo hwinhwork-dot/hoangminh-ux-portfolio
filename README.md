@@ -122,9 +122,9 @@ refusal wording.
 
 ## Deploy
 
-`main` auto-deploys to Vercel. Set `OPENAI_API_KEY` and the other variables from
-`.env.example` in Project Settings → Environment Variables. Rolling back a bad prompt is
-a Vercel instant rollback plus the corresponding entry in `eval/runs/`.
+`main` auto-deploys to Vercel. The knowledge index ships committed because Vercel has no
+build step that could regenerate it. Environment variables, verification commands and the
+kill switch: **[docs/DEPLOY.md](./docs/DEPLOY.md)**.
 
 ## Contact
 

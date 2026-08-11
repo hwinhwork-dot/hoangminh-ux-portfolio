@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import time
 
-from agent.config import get_settings
 from agent.guardrails.input_guard import check_input
 from agent.guardrails.output_guard import check_output
 from agent.guardrails.policies import get_policies
@@ -25,13 +24,17 @@ from agent.services import llm
 
 
 def _respond(state: StudioState, started: float) -> ChatResponse:
+    # Computed here rather than at the end of `run`, because most turns return early —
+    # a refusal, a canned answer, an empty retrieval — and each of those was reporting
+    # degraded=false even when no model was configured at all.
+    degraded = state.degraded or not llm.enabled()
     return ChatResponse(
         answer_html=state.answer_html,
         agent=state.speaker,  # type: ignore[arg-type]
         intent=state.intent or Intent.PROFILE,
         citations=state.citations,
         trace=state.trace,
-        degraded=state.degraded,
+        degraded=degraded,
         latency_ms=int((time.perf_counter() - started) * 1000),
     )
 
@@ -39,7 +42,6 @@ def _respond(state: StudioState, started: float) -> ChatResponse:
 async def run(request: ChatRequest) -> ChatResponse:
     started = time.perf_counter()
     policies = get_policies()
-    settings = get_settings()
     state = StudioState(
         message=request.message,
         session_id=request.session_id,
@@ -116,5 +118,4 @@ async def run(request: ChatRequest) -> ChatResponse:
             state.answer_html = policies.reply("not_indexed")
             state.speaker = "hana"
 
-    state.degraded = state.degraded or not llm.enabled() or not settings.llm_enabled
     return _respond(state, started)
