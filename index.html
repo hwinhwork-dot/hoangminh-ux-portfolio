@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nguyen Hoang Minh · UX Research & Product Discovery</title>
-<meta name="description" content="Nguyen Hoang Minh. UX research and product discovery. Journeys, value mapping, BRD and user stories, UAT, and lo-fi to hi-fi testing that lead to the right product." />
+<title>Nguyen Hoang Minh · UX Research, Product Discovery & AI Product</title>
+<meta name="description" content="Nguyen Hoang Minh. AI Talent at VinGroup. UX research, product discovery and AI product: journeys, value mapping, BRD and user stories, UAT, plus agent design, retrieval, guardrails and evals for AI products people can trust." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23ff5a36'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='15' font-weight='800' fill='%23fff' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=jetbrains-mono@400,500&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
@@ -55,6 +55,12 @@
   .hero{ min-height:100dvh; display:flex; align-items:center; position:relative; padding-top:66px; overflow:hidden; }
   .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center; width:100%; }
   @media(max-width:920px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero-top{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .now{ display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:var(--ink-2);
+    background:var(--surface); border:1px solid var(--line-2); border-radius:100px; padding:5px 14px 5px 11px; white-space:nowrap; }
+  .now b{ color:var(--ink); font-weight:700; }
+  .now i{ width:7px; height:7px; border-radius:50%; background:var(--pass); box-shadow:0 0 0 3px rgba(29,143,91,0.14); animation:nowpulse 2.4s ease-in-out infinite; }
+  @keyframes nowpulse{ 50%{ opacity:.45; } }
   .hero h1{ font-size:clamp(2.7rem,6.2vw,5rem); max-width:14ch; }
   .hero .sub{ margin-top:26px; font-size:clamp(1.05rem,1.6vw,1.28rem); color:var(--ink-2); max-width:46ch; line-height:1.5; }
   .ustory{ margin-top:30px; font-family:var(--mono); font-size:0.96rem; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px 20px; max-width:50ch; box-shadow:0 18px 40px rgba(24,25,29,0.06); }
@@ -266,10 +272,33 @@
   .hci-cell .ic{ width:40px; height:40px; border-radius:11px; background:var(--accent-soft); color:var(--accent); display:grid; place-items:center; font-family:var(--mono); margin-bottom:16px; }
   .hci-cell h4{ font-size:1.05rem; margin-bottom:8px; } .hci-cell p{ font-size:0.9rem; color:var(--ink-2); line-height:1.55; }
 
+  /* EXPERIENCE */
+  .tl{ display:grid; gap:14px; }
+  .tl-item{ display:grid; grid-template-columns:186px 1fr; gap:26px; background:var(--surface); border:1px solid var(--line);
+    border-radius:20px; padding:26px 28px; transition:.3s var(--ease); position:relative; }
+  .tl-item:hover{ transform:translateY(-4px); box-shadow:0 24px 50px rgba(24,25,29,0.10); border-color:var(--line-2); }
+  @media(max-width:760px){ .tl-item{ grid-template-columns:1fr; gap:12px; padding:22px; } }
+  .tl-when{ font-family:var(--mono); font-size:0.78rem; color:var(--ink-3); line-height:1.6; padding-top:4px; }
+  .tl-when .on{ display:inline-flex; align-items:center; gap:6px; color:var(--pass); font-weight:600; }
+  .tl-when .on::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--pass); }
+  .tl-body h3{ font-size:1.2rem; }
+  .tl-body h3 .at{ color:var(--accent); }
+  .tl-body .rl2{ font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3); font-weight:700; margin-top:7px; }
+  .tl-body p{ font-size:0.94rem; color:var(--ink-2); line-height:1.6; margin-top:10px; max-width:62ch; }
+  .tl-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+  .tl-tags span{ font-family:var(--mono); font-size:0.7rem; color:var(--ink-2); background:var(--paper); border:1px solid var(--line); border-radius:7px; padding:4px 9px; }
+  .tl-item.lead{ border-color:var(--line-2); box-shadow:0 18px 40px rgba(24,25,29,0.07); }
+  .tl-item.lead .tl-tags span{ background:var(--accent-soft); border-color:transparent; color:var(--accent); }
+
   /* SKILLS */
+  .skill-group{ margin-bottom:26px; } .skill-group:last-child{ margin-bottom:0; }
+  .skill-group .sg{ font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-3); font-weight:700; margin-bottom:14px; }
   .skills{ display:flex; flex-wrap:wrap; gap:11px; }
   .skill{ padding:11px 18px; border-radius:100px; background:var(--surface); border:1px solid var(--line); font-weight:600; font-size:0.95rem; transition:.25s var(--ease); }
   .skill:hover{ background:var(--accent); color:#fff; border-color:var(--accent); transform:translateY(-2px); }
+  .skill.ai{ border-color:var(--line-2); }
+  .skill.ai::before{ content:"◆"; color:var(--accent); font-size:0.7rem; margin-right:8px; vertical-align:1.5px; transition:color .25s ease; }
+  .skill.ai:hover::before{ color:#fff; }
 
   /* ABOUT */
   .about-grid{ display:grid; grid-template-columns:0.4fr 0.6fr; gap:50px; align-items:center; }
@@ -633,6 +662,7 @@
       <a href="#canvas">Canvas</a>
       <a href="#requirements">Requirements</a>
       <a href="#testing">Testing</a>
+      <a href="#experience">Experience</a>
       <a href="#about">About</a>
       <a href="#" id="aiNavOpen">AI Team<span class="ai-navdot"></span></a>
       <a href="#contact" class="nav-cta">Get in touch</a>
@@ -646,9 +676,12 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-left">
-        <span class="eyebrow">UX Research · Product Discovery</span>
+        <div class="hero-top">
+          <span class="eyebrow">UX Research · Product Discovery · AI Product</span>
+          <span class="now"><i></i> AI Talent <b>@ VinGroup</b></span>
+        </div>
         <h1 style="margin-top:18px;">I design the experience before the interface.</h1>
-        <p class="sub">I turn messy human needs into clear journeys, sharp requirements, and stories a team can build and test.</p>
+        <p class="sub">I turn messy human needs into clear journeys, sharp requirements, and stories a team can build and test — now for AI products, where the hard part is making an uncertain system worth trusting.</p>
         <div class="ustory" id="ustory">
           As a <span class="role" id="us-role">product team</span>,<br>
           I want to <b>understand the user deeply</b>,<br>
@@ -980,17 +1013,97 @@
   </div>
 </section>
 
+<!-- EXPERIENCE -->
+<section class="sec tint" id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Where I've done it</span>
+      <h2>Research, requirements, and AI products in production.</h2>
+      <p>Five roles, each one owning something end to end: the research, the spec, the interface, or the agent behind it.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-item lead reveal">
+        <div class="tl-when">Jul 2026 — <span class="on">Present</span></div>
+        <div class="tl-body">
+          <h3>AI Talent <span class="at">· VinGroup</span></h3>
+          <div class="rl2">AI Product · specialising in AI Product Management</div>
+          <p>Working the full arc of an AI product: deciding whether a problem needs AI at all, designing the agent and the interface around it, building the retrieval and guardrail layers, and proving the result against an evaluation set before it ships.</p>
+          <div class="tl-tags"><span>AI Product Strategy</span><span>Deep PRD &amp; PMF</span><span>ROI Modeling</span><span>Roadmap Planning</span><span>Stakeholder Management</span></div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">2026</div>
+        <div class="tl-body">
+          <h3>Product Owner &amp; UI/UX <span class="at">· VinFast test-drive assistant</span></h3>
+          <div class="rl2">Owned the product, designed the interface, built the agent</div>
+          <p>A booking product where a conversational agent helps a customer find a slot, hold it, verify identity and confirm — sharing the same backend services as the deterministic UI. I owned scope and acceptance, designed the journey from wireframe to built interface, and built the multi-agent orchestration with guarded tools. The agent never writes to the database directly; every change goes through the same service the UI uses.</p>
+          <div class="tl-tags"><span>LangGraph</span><span>Guarded tools</span><span>Input/Output guardrails</span><span>Identity verification</span><span>React + FastAPI</span></div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Sep — Dec 2025</div>
+        <div class="tl-body">
+          <h3>Product Owner <span class="at">· EchoMind</span></h3>
+          <div class="rl2">AI brain-to-text system</div>
+          <p>Ran the full lifecycle on Agile sprints with a RACI matrix, drove the move from a baseline model to a Transformer architecture, and closed at 100% milestone completion — decoding at 55–65 words per minute with under a second of latency.</p>
+          <div class="tl-tags"><span>Agile + RACI</span><span>Model trade-offs</span><span>100% milestones</span></div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Mar — Jun 2025</div>
+        <div class="tl-body">
+          <h3>Product Lead <span class="at">· E-Reader &amp; Digital Education</span></h3>
+          <div class="rl2">Student activation journey</div>
+          <p>Applied HCI principles to redesign activation from device provisioning to content updates, cutting cognitive load at onboarding and decomposing pain points into a buildable feature set. Top 20 finalist in a competition directed by the HCMC People's Committee.</p>
+          <div class="tl-tags"><span>Journey redesign</span><span>HCI</span><span>Top 20 finalist</span></div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Jul 2024 — Oct 2025</div>
+        <div class="tl-body">
+          <h3>R&amp;D Intern → PM Executive <span class="at">· SIHUB</span></h3>
+          <div class="rl2">Startup &amp; Innovation Hub of Ho Chi Minh City</div>
+          <p>Owned startup onboarding journeys and founder insights, ran A/B and interleaving experiments, led a city-level study across 150+ stakeholders, and turned scattered feedback into an NPS view reported directly to the Board of Directors.</p>
+          <div class="tl-tags"><span>150+ stakeholders</span><span>A/B testing</span><span>NPS</span><span>Board reporting</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SKILLS -->
-<section class="sec" id="skills" style="padding-top:40px;">
+<section class="sec" id="skills" style="padding-top:104px;">
   <div class="wrap">
     <div class="sec-head reveal"><h2>The toolkit.</h2></div>
-    <div class="skills reveal">
-      <span class="skill">User Research</span><span class="skill">Customer Experience</span><span class="skill">Journey Mapping</span>
-      <span class="skill">Value Proposition Canvas</span><span class="skill">Problem Tree</span><span class="skill">Design Thinking</span>
-      <span class="skill">BRD</span><span class="skill">User Stories</span><span class="skill">Acceptance Criteria</span>
-      <span class="skill">Requirement Traceability</span><span class="skill">Product Backlog</span><span class="skill">UAT</span>
-      <span class="skill">Lo-fi &amp; Hi-fi Prototyping</span><span class="skill">Usability Testing</span><span class="skill">HCI</span>
-      <span class="skill">A/B Testing</span><span class="skill">Agile</span><span class="skill">Stakeholder Interviews</span><span class="skill">Prioritization</span>
+    <div class="skill-group reveal">
+      <div class="sg">Discovery &amp; delivery</div>
+      <div class="skills">
+        <span class="skill">User Research</span><span class="skill">Customer Experience</span><span class="skill">Journey Mapping</span>
+        <span class="skill">Value Proposition Canvas</span><span class="skill">Problem Tree</span><span class="skill">Design Thinking</span>
+        <span class="skill">BRD</span><span class="skill">User Stories</span><span class="skill">Acceptance Criteria</span>
+        <span class="skill">Requirement Traceability</span><span class="skill">Product Backlog</span><span class="skill">UAT</span>
+        <span class="skill">Lo-fi &amp; Hi-fi Prototyping</span><span class="skill">Usability Testing</span><span class="skill">HCI</span>
+        <span class="skill">A/B Testing</span><span class="skill">Agile</span><span class="skill">Stakeholder Interviews</span><span class="skill">Prioritization</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="sg">AI product</div>
+      <div class="skills">
+        <span class="skill ai">AI Problem Framing</span><span class="skill ai">Automate vs Augment</span><span class="skill ai">Rule / Workflow / Agent</span>
+        <span class="skill ai">PRD for AI Features</span><span class="skill ai">Product-Market Fit</span><span class="skill ai">AI ROI &amp; Cost Modeling</span>
+        <span class="skill ai">Agent Architecture</span><span class="skill ai">ReAct &amp; Tool Design</span><span class="skill ai">System Prompt Engineering</span>
+        <span class="skill ai">Multi-Agent Orchestration</span><span class="skill ai">RAG &amp; Retrieval Design</span><span class="skill ai">Chunking &amp; Embeddings</span>
+        <span class="skill ai">Guardrails &amp; Red Teaming</span><span class="skill ai">Human-in-the-Loop</span><span class="skill ai">Golden Sets &amp; Evals</span>
+        <span class="skill ai">Data Quality &amp; Observability</span><span class="skill ai">LLM Cost per Feature</span><span class="skill ai">Deployment &amp; Eval Gates</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="sg">Designing for uncertainty</div>
+      <div class="skills">
+        <span class="skill ai">Confidence &amp; Trust UX</span><span class="skill ai">Provenance &amp; Citations</span><span class="skill ai">Graceful "I don't know"</span>
+        <span class="skill ai">Escalation &amp; Handoff</span><span class="skill ai">Reversibility</span><span class="skill ai">Conversation Design</span>
+        <span class="skill ai">Latency as Choreography</span><span class="skill ai">Error &amp; Recovery States</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1001,15 +1114,16 @@
     <div class="about-grid">
       <div class="id-card reveal">
         <span class="wm" aria-hidden="true">M</span>
-        <span class="ek">UX &amp; Product</span>
+        <span class="ek">UX · Product · AI</span>
         <div class="nm"><span class="t">Nguyễn</span><span class="t">Hoàng</span><span class="a">Minh</span></div>
         <span class="loc">Ho Chi Minh City, Vietnam</span>
       </div>
       <div class="about-copy reveal">
         <span class="eyebrow">About</span>
         <h2 style="margin-top:14px;">I study people first, and let the product follow.</h2>
-        <p>My background is in technology and innovation with a focus on human-computer interaction. I have run end-to-end journeys for tech startups and a student digital-education ecosystem that became a <span class="hl">Top 20 city-level finalist</span>.</p>
+        <p>My background is in technology and innovation with a focus on human-computer interaction. I have run end-to-end journeys for tech startups and a student digital-education ecosystem that became a <span class="hl">Top 20 city-level finalist</span>. Today I am an <span class="hl">AI Talent at VinGroup</span>, working on AI products end to end.</p>
         <p>What I care about is clarity. <span class="hl">A good experience removes friction the user never even notices.</span> I bridge research and delivery: journeys and value maps to find the friction, then BRDs, stories, and UAT to take it away and keep ownership clear until release.</p>
+        <p>AI changed the hard part, not the job. A model is not a deterministic system, so the design work moved to <span class="hl">making an uncertain system worth trusting</span> — showing where an answer came from, saying "I don't know" well, and deciding when a human stays in the loop. I build that layer myself: the agent, the retrieval, the guardrails, and the evaluation set that decides whether it ships.</p>
       </div>
     </div>
   </div>
@@ -1018,9 +1132,9 @@
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <span class="eyebrow reveal">Open to UX &amp; product roles</span>
+    <span class="eyebrow reveal">Open to UX, product &amp; AI product roles</span>
     <h2 class="reveal" style="margin-top:18px;">Let's build something <span class="ink-accent">people love to use</span>.</h2>
-    <p class="reveal">Based in Ho Chi Minh City and available for UX research, customer experience, and product discovery work.</p>
+    <p class="reveal">Based in Ho Chi Minh City and available for UX research, customer experience, product discovery and AI product work.</p>
     <div class="cta-row reveal" style="justify-content:center;"><a href="mailto:hwinh.work@gmail.com" class="btn btn-primary">Get in touch <span class="arrow">↗</span></a></div>
     <div class="links reveal">
       <a class="chip-link" href="mailto:hwinh.work@gmail.com">✉ hwinh.work@gmail.com</a>
@@ -1030,7 +1144,7 @@
   </div>
 </section>
 
-<footer><div class="foot"><span>© 2026 Nguyen Hoang Minh · UX Research &amp; Product</span><span>Ho Chi Minh City</span></div></footer>
+<footer><div class="foot"><span>© 2026 Nguyen Hoang Minh · UX Research · Product · AI</span><span>Ho Chi Minh City</span></div></footer>
 </main>
 
 <!-- ===== AI PRODUCT STUDIO ===== -->
@@ -1360,7 +1474,7 @@
     gsap.registerPlugin(ScrollTrigger);
 
     // hero intro
-    gsap.from('.hero-left .eyebrow, .hero h1, .hero .sub, .hero .ustory, .hero .cta-row', { y:32, opacity:0, duration:1.05, ease:'expo.out', stagger:0.1, delay:0.1 });
+    gsap.from('.hero-left .eyebrow, .hero-left .now, .hero h1, .hero .sub, .hero .ustory, .hero .cta-row', { y:32, opacity:0, duration:1.05, ease:'expo.out', stagger:0.1, delay:0.1 });
     gsap.from('.hero-stage .fcard', { y:48, opacity:0, scale:0.9, duration:1.1, ease:'expo.out', stagger:0.12, delay:0.45 });
     // hero exit parallax (Apple-style)
     gsap.to('.hero-left', { y:-60, opacity:0.5, ease:'none', scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true } });
@@ -1400,6 +1514,10 @@
   }
 })();
 </script>
+
+<!-- Transport for the studio. Loads before the orchestrator so window.StudioClient
+     exists when the first question is asked; the studio works without it. -->
+<script src="assets/js/studio-client.js"></script>
 
 <script>
 /* ===== AI PRODUCT STUDIO v4 - doodle multi-agent orchestrator (offline knowledge, no API, EN only) ===== */
@@ -1534,8 +1652,9 @@
   function tableHTML(head, rows){ return '<table class="ai-table"><thead><tr>'+head.map(h=>'<th>'+h+'</th>').join('')+
       '</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table>'; }
 
-  const SKILL_ROWS=[['User research',92],['Journey mapping',90],['User stories & AC',88],['VPC / problem framing',86],['Usability & UAT',84],['Figma & prototyping',78],['Data & Python',72]];
+  const SKILL_ROWS=[['User research',92],['Journey mapping',90],['AI product framing',90],['User stories & AC',88],['VPC / problem framing',86],['Agent & prompt design',86],['Usability & UAT',84],['Guardrails & AI evals',82],['RAG & knowledge design',80],['Figma & prototyping',78],['Data & Python',72]];
   const PROJ_ROWS=[
+    ['<b>ViVi &middot; VinFast</b>','Product Owner &middot; UI/UX','Multi-agent test-drive booking assistant','Agent + web UI + admin, guarded &amp; containerised'],
     ['<b>EchoMind</b>','Product Owner','AI brain-to-text, Agile + RACI','55-65 WPM, &lt;1s latency, 100% milestones'],
     ['<b>E-Reader Ecosystem</b>','Product Lead','HCI activation journey','Top 20 finalist (HCMC People\'s Committee)'],
     ['<b>SIHUB</b>','PM Executive','Startup onboarding, insights, NPS','150+ stakeholders, Board reporting']];
@@ -1543,10 +1662,29 @@
     ['2022 - 2026','<b>UEH University</b>','B. of Technology &amp; Innovation, GPA 3.57'],
     ['Jul - Dec 2024','<b>SIHUB, R&amp;D Intern</b>','City-level study, 150+ stakeholders'],
     ['Jan - Oct 2025','<b>SIHUB, PM Executive</b>','Startup journeys, A/B tests, Board reports'],
-    ['Sep - Dec 2025','<b>EchoMind, Product Owner</b>','Brain-to-text system, 100% milestones']];
+    ['Sep - Dec 2025','<b>EchoMind, Product Owner</b>','Brain-to-text system, 100% milestones'],
+    ['Jul 2026 - now','<b>VinGroup, AI Talent</b>','AI products end to end; PO &amp; UI/UX on the VinFast assistant']];
 
   /* ordered: specific before generic; a = author agent; chart = Kai builds a visual */
   const DB=[
+    { re:/vingroup|vin group|vin ?group|current(ly)? (work|role|job)|right now|where.*(work|working) now|hiện tại|hien tai|ai talent/i, a:'minh',
+      h:'Minh is currently an <b>AI Talent at VinGroup</b> (Jul 2026 - present), working the full arc of an AI product: deciding whether a problem needs AI at all, designing the agent and the interface around it, building the retrieval and guardrail layers, and proving the result against an evaluation set before release. He is specialising in <b>AI Product Management</b> - product strategy, deep PRDs and product-market fit, ROI modelling, stakeholder management and roadmap planning under model uncertainty.' },
+    { re:/vinfast|vivi|test.?drive|booking assistant|p-?053/i, a:'minh',
+      h:'<b>ViVi, the VinFast test-drive assistant</b> - Minh was <b>Product Owner and UI/UX lead</b>, and he built the agent. A customer browses the catalogue and a conversational agent helps them find a slot, hold it, verify identity and confirm the booking, sharing the same backend services as the deterministic UI. He owned scope and acceptance, designed the journey from wireframe to built React interface, and built the <b>LangGraph</b> orchestration with about ten guarded tools plus input/output guardrails. His favourite decision: <b>the agent never writes to the database directly</b> - every change goes through the same booking service the UI uses, so it cannot invent a booking the system does not recognise.' },
+    { re:/is (he|minh) technical|can (he|minh) (code|program|build)|coding|programming|developer|software engineer|technical background|hands.?on/i, a:'minh',
+      h:'Not a software engineer by title, and he does not claim to be - but he ships. He writes specs engineering can build, works in <b>Python</b> for data analysis, and has built AI agents end to end: <b>LangGraph</b> orchestration, guarded tools, retrieval pipelines, input/output guardrails and golden-set evaluation. Two live proofs: the <b>ViVi</b> agent for the VinFast test-drive product, and this studio. His degree is Technology &amp; Innovation with an <b>HCI</b> specialisation.' },
+    { re:/\brag\b|retrieval|vector|embedding|chunk|hallucinat|grounding|knowledge base/i, a:'minh',
+      h:'Minh designs <b>retrieval</b> as a product problem, not a model problem. Chunking strategy, embeddings, vector stores, metadata filtering, <b>hybrid lexical + dense search</b>, reranking, and a <b>confidence floor</b> below which the system declines to answer rather than guessing. His position: most RAG failures are not the model failing, they are chunking, retrieval and grounding failures - which means they have product fixes. This studio runs on exactly that pipeline, with a versioned knowledge base as the only source of truth.' },
+    { re:/guardrail|jailbreak|injection|red.?team|responsible ai|ai safety|hitl|human.in.the.loop/i, a:'minh',
+      h:'Minh builds <b>layered guardrails</b>: an input guard that blocks injection, out-of-scope and unsafe requests before a token is spent, a tool guard that allows only validated calls, and an output guard that checks citations, forbidden patterns and format before anything reaches the user. He red-teams his own agents before release. On <b>human-in-the-loop</b> he designs the model deliberately - in-the-loop (approve before acting), on-the-loop (monitor and intervene) or in-command (set the policy) - chosen by the cost of a wrong action, plus a designed escalation path. His rule: <b>a rule a model can break is not a guardrail, it is a suggestion</b>. Enforcement belongs in code.' },
+    { re:/\beval|golden set|test.*(ai|agent)|benchmark|accuracy|regression/i, a:'minh',
+      h:'Minh treats <b>evals as acceptance criteria for AI</b>. A golden set written before the build, covering grounding, routing, refusal, anti-hallucination, adversarial and format cases. Versioned runs, so a prompt change is a claim and the run file is its evidence. And a <b>release gate</b>: grounding and adversarial cases must be perfect before shipping, the same discipline as the UAT gate on this page. This studio ships with 31 such cases.' },
+    { re:/uncertain|trust|confidence|explainab|transparen|ai ux|ux for ai|design for ai/i, a:'minh',
+      h:'This is Minh\'s specialty. Classic UX assumes a deterministic system; AI breaks that, and the interesting design work lives in the break. The patterns he designs with: <b>confidence made visible</b> so users calibrate trust, <b>provenance and citations</b> because trust comes from checkability not tone, a <b>graceful "I don\'t know"</b> designed for rather than treated as an error, <b>reversibility</b> for anything the system does on your behalf, and <b>latency as choreography</b> - when a system takes seconds, the wait gets designed. The walking agents in this studio are that last principle in action.' },
+    { re:/ai product|product.market fit|\bpmf\b|roi|cost per|token cost|ai strateg|ai pm/i, a:'minh',
+      h:'Minh\'s <b>AI product</b> practice starts before the build: does this problem need AI, or is a rule or workflow enough? If AI, at what level - <b>rule, workflow or agent</b>? Automate or augment? Then <b>Go / Not yet / No-go</b>, and "Not yet" is a real answer. On the commercial side he models <b>token and inference cost per feature</b>, frames <b>ROI</b> for AI investment, and translates a technical capability into a business case a non-technical stakeholder can approve or reject. His chosen depth is <b>AI Product Management</b>: strategy, deep PRDs and PMF, financial modelling, stakeholder management, roadmap planning.' },
+    { re:/multi.?agent|orchestrat|langgraph|\bmcp\b|\ba2a\b|react pattern|supervisor/i, a:'minh',
+      h:'Minh builds <b>multi-agent systems</b> with explicit roles rather than one agent doing everything: supervisor and specialist patterns, agent-to-agent handoff, MCP-style tool connectivity - and the judgement to know when one good agent beats four mediocre ones. He works with the <b>ReAct loop</b> (Thought &rarr; Action &rarr; Observation) and reads traces as a debugging artifact. Two live examples: the <b>ViVi</b> agent for VinFast, and this studio - Hana triages, Vy retrieves, Minh answers, Kai charts, and the walking you see is the real handoff trace.' },
     { re:/\bprd\b|product requirement/i, a:'minh',
       h:'<b>PRD level:</b> Minh writes <b>feature-level PRDs end to end</b>: problem statement, goals and non-goals, user stories with acceptance criteria, flows, edge cases and success metrics. He also builds the <b>BRD baseline</b> and keeps a <b>requirement traceability matrix</b> so nothing gets lost on the way to UAT. For org-wide, multi-team PRDs he still asks for a senior review pass, which he sees as healthy at his stage. Proof: the Requirements section of this very portfolio.' },
     { re:/\bbrd\b|business requirement/i, a:'minh',
@@ -1568,7 +1706,7 @@
     { re:/available|start date|when can.*(start|join)|notice period/i, a:'hana',
       h:'Minh is a final-year student with a flexible schedule and can typically start within <b>1 to 2 weeks</b>. For exact timing, reach him at <b>hwinh.work@gmail.com</b>.' },
     { re:/why (should|hire)|stand ?out|what makes.*(different|unique)/i, a:'minh',
-      h:'Three honest reasons: (1) he has already run <b>real product work end to end</b>, not just coursework: a Top 20 city-level product, a 150+ stakeholder research program, an AI build shipped at 100% milestones; (2) he bridges <b>research and delivery</b>: journey maps and VPCs on one side, BRDs, stories and UAT on the other; (3) he is <b>AI-first</b>, building his own agentic workflows to move faster. What he lacks in years he makes up in evidence.' },
+      h:'Three honest reasons: (1) he has already run <b>real product work end to end</b>, not just coursework: a Top 20 city-level product, a 150+ stakeholder research program, an AI build shipped at 100% milestones; (2) he bridges <b>research and delivery</b>: journey maps and VPCs on one side, BRDs, stories and UAT on the other; (3) he is one of the few UX people who can <b>design an AI product and build it</b> - agent architecture, retrieval, guardrails and evals, plus the interface design that makes an uncertain system trustworthy. What he lacks in years he makes up in evidence.' },
     { re:/weakness|improve yourself|biggest flaw/i, a:'minh',
       h:'Honest answer: Minh tends to <b>research deeply before deciding</b>, which can slow him down. He manages it by timeboxing discovery and validating with cheap lo-fi tests instead of waiting for perfect data. He would rather ship a tested assumption than a polished guess.' },
     { re:/echomind|brain.?to.?text/i, a:'minh',
@@ -1592,11 +1730,11 @@
     { re:/notion|jira|what tools|tool ?stack|software.*(use|know)/i, a:'minh',
       h:'Daily tools: <b>Figma</b> (wireframes to hi-fi prototypes), <b>Notion</b> (docs and backlog), <b>Python + Google Colab</b> (data analysis), spreadsheets for trackers and RTMs, and <b>Claude/LLM agents</b> for AI-first workflows. He picks the lightest tool that keeps the team aligned.' },
     { re:/\bai\b|agent|prompt|claude|gpt|llm|automation/i, a:'minh',
-      h:'Minh works <b>AI-first</b>. He built a custom Claude skill that writes concept-based specs through 7 guided sprints, asking what/why questions each sprint so the AI absorbs the real workflow, then packaged it as a reusable command. This very studio, a multi-agent handoff with triage, research, knowledge and visualization roles, is his own design.' },
+      h:'Minh works <b>AI-first</b>, and builds the systems rather than just using them. Three pieces of evidence: <b>ViVi</b>, the VinFast test-drive assistant where he was PO, UI/UX lead and built the LangGraph agent; <b>this studio</b>, a four-agent handoff with triage, research, knowledge and visualisation roles, grounded in a versioned knowledge base with layered guardrails and a golden-set evaluation; and a custom <b>Claude skill</b> that writes concept-based specs through 7 guided sprints, packaged as a reusable command. He is currently an <b>AI Talent at VinGroup</b>.' },
     { re:/skill|chart|strength|kỹ năng|ky nang|biểu đồ|bieu do|điểm mạnh/i, a:'kai', chart:true,
       h:'Here is Minh\'s core skill profile:'+barsHTML(SKILL_ROWS,'Self-assessment, calibrated against real project work.') },
     { re:/project|compare|portfolio piece|dự án|du an|so sánh|so sanh|table|bảng/i, a:'kai', chart:true,
-      h:'Three projects Minh led, side by side:'+tableHTML(['Project','Role','Focus','Result'],PROJ_ROWS) },
+      h:'Four projects Minh led, side by side:'+tableHTML(['Project','Role','Focus','Result'],PROJ_ROWS) },
     { re:/experience|timeline|career|work history|kinh nghiệm|kinh nghiem/i, a:'kai', chart:true,
       h:'Minh\'s path so far:'+tableHTML(['When','Where','What'],EXP_ROWS) },
     { re:/education|gpa|university|ueh|degree|coursework|học vấn|hoc van|trường/i, a:'minh',
@@ -1610,11 +1748,17 @@
     { re:/contact|email|phone|reach|hire|liên hệ|lien he/i, a:'hana',
       h:'Reach Minh at <b>hwinh.work@gmail.com</b> or <b>+84 765 828 191</b> (Ho Chi Minh City). AI chatbot portfolio: <b>hwinh-portfolio.streamlit.app</b>. He is open to UX research, CX and product roles.' },
     { re:/intro|who is|about (minh|him)|yourself|giới thiệu|gioi thieu|là ai|la ai/i, a:'minh',
-      h:'<b>Minh</b> is a final-year Technology &amp; Innovation student (UEH, GPA 3.57) specializing in <b>UX research and product discovery</b>. He turns user behavior into journey maps, value propositions and buildable user stories, then validates with testing. Highlights: <b>Top 20 city finalist</b> (E-Reader ecosystem), <b>150+ stakeholders</b> coordinated at SIHUB, and an AI brain-to-text build shipped at <b>100% milestones</b>.' }
+      h:'<b>Minh</b> is an <b>AI Talent at VinGroup</b> and a final-year Technology &amp; Innovation student (UEH, GPA 3.57), specialising in <b>UX research, product discovery and AI product</b>. He turns user behaviour into journey maps, value propositions and buildable user stories, validates with testing, and builds the AI layer himself - agent, retrieval, guardrails, evals. Highlights: <b>PO and UI/UX on the VinFast test-drive assistant</b>, <b>Top 20 city finalist</b> (E-Reader ecosystem), <b>150+ stakeholders</b> coordinated at SIHUB, and an AI brain-to-text build shipped at <b>100% milestones</b>.' }
   ];
   const FALLBACK={ a:'hana',
-    h:'I have not indexed that one yet. Try a sticky note below, or ask about Minh\'s <b>PRD/BRD writing, user stories, UAT, research methods, Figma, projects, skills, metrics, teamwork, availability or contact</b>.' };
+    h:'I have not indexed that one yet. Try a sticky note below, or ask about Minh\'s <b>AI product work (agents, RAG, guardrails, evals), his role at VinGroup, the VinFast assistant, PRD/BRD writing, user stories, UAT, research methods, projects, skills, availability or contact</b>.' };
   function lookup(q){ for(const e of DB){ if(e.re.test(q)) return e; } return (q.trim().length<4)? DB[DB.length-1] : FALLBACK; }
+
+  /* The table above is the availability floor. StudioClient calls /api/chat first and
+     drops back to this whenever the API is unreachable, rate-limited, out of budget or
+     simply not deployed yet — so the studio answers under every condition. */
+  window.StudioFallback = { lookup: q => { const e = lookup(q); return { h:e.h, a:e.a, chart:!!e.chart }; } };
+  const history = [];
 
   /* ---------- orchestration (slower pace, staggered bubbles) ---------- */
   let busy=false, opened=false, entryP=null, idleTimer=null, idleOn=false;
@@ -1654,6 +1798,12 @@
     postUser(q);
     const typing=postTyping();
 
+    /* Fire the request now and let the walk cover the wait. By the time the agents
+       reach Minh's desk (~4.5s of choreography) the answer has almost always landed,
+       so the animation is the loading state rather than something laid over one. */
+    const pending = (window.StudioClient ? window.StudioClient.ask(q, history) : Promise.resolve(null))
+      .catch(()=>null);
+
     setStatus('TRIAGE'); bubble('hana', T.triage, 2200); log('hana', T.triage);
     await sleep(1400);
 
@@ -1669,7 +1819,14 @@
     bubble('minh', T.know, 2000); log('minh', T.know);
     await sleep(1400);
 
-    if(entry.chart){
+    /* Resolve before the Kai branch: whether a chart is drawn is the backend's call,
+       and the walk should reflect the work that actually happened. */
+    const reply = await pending;
+    const speaker = (reply && reply.agent) || entry.a;
+    const answer  = (reply && reply.answer_html) || entry.h;
+    const wantsChart = reply ? reply.agent === 'kai' : !!entry.chart;
+
+    if(wantsChart){
       await walk('vy','data_meet');
       setStatus('BUILDING'); await sleep(300);
       bubble('kai', T.build, 2400); log('kai', T.build);
@@ -1680,7 +1837,9 @@
     await walkVia('hana',['center','reception']);
     setStatus('READY'); bubble('hana', T.done, 2800); log('hana', T.done);
 
-    await fillBot(typing, entry.a, entry.h);
+    await fillBot(typing, speaker, answer);
+    history.push({role:'user', content:q}, {role:'assistant', content:answer.replace(/<[^>]+>/g,' ').slice(0,400)});
+    while(history.length>6) history.shift();
     busy=false; sendBtn.disabled=false; input.focus(); armIdle();
   }
 
@@ -1703,9 +1862,12 @@
   const CHIPS=[
     ['About Minh','Introduce Minh, who is he?'],
     ['Skills chart','Show me a chart of Minh\'s skills'],
-    ['Compare 3 projects','Compare Minh\'s three projects in a table'],
+    ['Compare projects','Compare Minh\'s projects in a table'],
     ['PRD & BRD','Which level of PRD can Minh write?'],
-    ['AI workflow','How does Minh use AI?'],
+    ['Now at VinGroup','What is Minh doing right now?'],
+    ['The VinFast agent','Tell me about the VinFast test-drive assistant'],
+    ['Agents & guardrails','How does Minh build agents and guardrails?'],
+    ['Designing for AI','How does he design for AI uncertainty?'],
     ['Contact','How can I contact Minh?']
   ];
   CHIPS.forEach(([label,q])=>{ const b=document.createElement('button'); b.type='button'; b.className='ai-chip'; b.textContent=label;

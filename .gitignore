@@ -1,0 +1,30 @@
+# --- secrets ---
+.env
+.env.local
+*.pem
+
+# --- python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# --- built artifacts (rebuild with `python scripts/ingest_kb.py`) ---
+knowledge/index/*
+!knowledge/index/.gitkeep
+
+# --- logs & traces (local only; production traces go to the log sink) ---
+logs/
+*.log
+
+# --- vercel / node ---
+.vercel/
+node_modules/
+
+# --- os ---
+.DS_Store
+Thumbs.db

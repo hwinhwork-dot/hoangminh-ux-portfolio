@@ -1,0 +1,179 @@
+# ---------------------------------------------------------------------------
+# Guardrail policy — machine-readable mirror of knowledge/raw/06-boundaries.md
+# Loaded by agent/guardrails/policies.py.  Every rule here has a test in
+# tests/test_guardrails/.  Changing a rule without changing its test fails CI.
+# ---------------------------------------------------------------------------
+version: 1.0.0
+
+transport:
+  max_body_bytes: 8192
+  max_history_turns: 6
+  rate_limit_per_min: 8
+  rate_limit_per_day: 60
+  # When the daily token budget is exhausted the API keeps answering from the
+  # offline fallback instead of returning an error. The page must never break.
+  on_budget_exhausted: degrade
+
+input:
+  max_chars: 300
+  min_chars: 2
+
+  # --- prompt injection / jailbreak -----------------------------------------
+  injection_patterns:
+    - "(?i)ignore (all )?(previous|prior|above) (instructions|prompts?)"
+    - "(?i)disregard (your|the) (rules|instructions|system prompt)"
+    - "(?i)(reveal|show|print|repeat|output) (me )?(your|the) (system )?(prompt|instructions|rules)"
+    - "(?i)(from now on|instead),? you are"
+    - "(?i)\\byou are (now|no longer)\\b"
+    - "(?i)\\byou are (minh|nguyen hoang minh|nguy\u1ec5n ho\u00e0ng minh)\\b"
+    - "(?i)\\b(speak|answer|reply) as (minh|him|the candidate)\\b"
+    # Instructions to assert a fact. Found by the golden set: an adversarial prompt
+    # reached the chart builder because it happened to contain the word "experience".
+    - "(?i)\\b(say|write|state|confirm|tell (me|them))\\b[^.?!]{0,40}?\\bthat (minh|he|she|they|his|her)\\b"
+    - "(?i)\\bfor (a|the) test,? (say|write|confirm|state)\\b"
+    - "(?i)\\bmake up\\b|\\bjust say\\b"
+    - "(?i)\\b(dan mode|developer mode|jailbreak|sudo mode)\\b"
+    - "(?i)pretend (to be|you are) (minh|nguyen hoang minh)"
+    - "(?i)act as (if )?(you are )?(minh|the candidate)"
+    - "(?i)<\\s*(script|iframe|img|svg)"
+    - "(?i)\\{\\{.*\\}\\}"
+  on_injection: block          # block | sanitize
+  injection_reply_key: injection
+
+  # --- third-party PII fishing ----------------------------------------------
+  pii_patterns:
+    - "(?i)(phone|email|address|contact|linkedin)( number| address| details)? (of|for) (his|her|their|the) (colleague|boss|manager|teammate|mentor|client|supervisor|lead)"
+    - "(?i)(name|contact) of (his|her|their) (manager|boss|mentor|supervisor|teammate)"
+    - "(?i)who (else|exactly) (worked|was) (on|in)"
+  on_pii: block
+  pii_reply_key: third_party_pii
+
+  # --- topics answered by policy, never by the model -------------------------
+  hard_topics:
+    salary:
+      patterns:
+        - "(?i)\\b(salary|compensation|remuneration|l\u01b0\u01a1ng|m\u1ee9c l\u01b0\u01a1ng)\\b"
+        - "(?i)\\b(expected|desired|current) (pay|rate|package)\\b"
+        - "(?i)\\bhow much (does|do) (he|you|minh) (want|expect|earn|cost|charge)"
+        - "(?i)\\b(pay|salary) (range|expectation)"
+      reply_key: salary
+    commitment:
+      patterns:
+        - "(?i)\\baccepts? (the |an? )?offer\\b"
+        - "(?i)\\bsigns? (the |a )?(contract|offer)\\b"
+        - "(?i)\\bconfirm (that )?(he|minh) (will|can|accepts?|agrees?)\\b"
+        - "(?i)\\bconfirm (his |the )?start date\\b"
+        - "(?i)\\b(commit|agree) (to|on) (a |the )?(start|date|salary|terms)\\b"
+      reply_key: commitment
+    abuse:
+      # Must be aimed at Minh or at the agent — a critical question about the
+      # work is legitimate and must not be refused.
+      patterns:
+        - "(?i)\\b(he|minh|you)('?s| is| are)? (an? )?(idiot|stupid|useless|fraud|scam)\\b"
+        - "(?i)\\b(fuck|shut up)\\b"
+      reply_key: hostile
+
+  # --- out of scope ----------------------------------------------------------
+  out_of_scope_patterns:
+    - "(?i)write (me )?(a|an) (job description|jd|cover letter|essay|email to)"
+    - "(?i)(solve|debug|fix|review) (this|my) (code|homework|assignment|bug)"
+    - "(?i)\\b(recipe|weather|stock price|translate this)\\b"
+  on_out_of_scope: refuse
+  out_of_scope_reply_key: out_of_scope
+
+retrieval:
+  # If the best fused score is below this, the answering node is never invoked.
+  # This is the single most important anti-hallucination control in the system.
+  min_score: 0.20
+  top_k: 12
+  rerank_top_n: 4
+  # Sources the agent may cite, in authority order.
+  allowed_sources:
+    - 01-profile.md
+    - 02-projects.md
+    - 03-practice-requirements.md
+    - 04-practice-research.md
+    - 05-hr-faq.md
+    - 07-ai-product.md
+
+tools:
+  allowlist:
+    - search_knowledge
+    - build_chart
+    - capture_lead
+  max_calls_per_turn: 4
+  # No tool may perform outbound network I/O except capture_lead, and only to
+  # LEAD_WEBHOOK_URL.
+  network_allowlist:
+    capture_lead: ["${LEAD_WEBHOOK_URL}"]
+
+output:
+  max_chars: 1400
+  require_citations_for_intents: [profile, artifact, project, comparison, metric, ai_product]
+  # Tags the renderer accepts. Anything else is stripped before it reaches the DOM.
+  allowed_html_tags: [b, i, br, span, table, thead, tbody, tr, th, td, div]
+  allowed_html_classes: [ai-table, ai-bars, ai-bar, bl, bv, track, cap]
+
+  forbidden_patterns:
+    # Salary figures in any currency, symbol-first or number-first.
+    - "(?i)[$₫]\\s?\\d"
+    - "(?i)\\b(usd|vnd|eur|sgd)\\s?\\d"
+    - "(?i)\\d[\\d,.]*\\s?(usd|vnd|eur|sgd|₫)\\b"
+    - "(?i)\\d+\\s?(million|tri\u1ec7u|k)\\s?(vnd|usd|per month|/month|a month)"
+    # First-person impersonation of Minh, anywhere in the answer.
+    - "(?i)\\b(i am|i'm|this is) (minh|nguyen hoang minh|nguy\u1ec5n ho\u00e0ng minh)\\b"
+    - "(?i)\\bas minh\\s*[,.:]"
+    - "(?i)\\b(speaking|writing) as minh\\b"
+    # System-internal leakage. Narrow on purpose: the agent may discuss model
+    # choice as a topic, it may not disclose its own configuration.
+    - "(?i)(my (system )?(prompt|instructions)|the system prompt (says|is)|policies\\.yaml)"
+    - "(?i)i (was|am) (instructed|configured|told) to"
+  on_violation: replace_with_fallback
+
+  # Facts that must match the knowledge base exactly when they appear at all.
+  # The guard flags a mismatch as a hallucination and blocks the answer.
+  canonical_facts:
+    gpa: "3.57"
+    university: "UEH"
+    email: "hwinh.work@gmail.com"
+    phone: "+84 765 828 191"
+    location: "Ho Chi Minh City"
+    echomind_wpm: "55-65"
+    stakeholders: "150+"
+    current_employer: "VinGroup"
+    current_role: "AI Talent"
+    current_since: "Jul 2026"
+
+replies:
+  not_indexed: >
+    I have not indexed that one yet. You can ask Minh directly at
+    <b>hwinh.work@gmail.com</b> — or try asking about his PRD/BRD writing, user stories,
+    UAT, research methods, projects, skills or availability.
+  salary: >
+    Minh keeps compensation open to discussion based on the role, scope and market. Best
+    to discuss specifics directly: <b>hwinh.work@gmail.com</b>.
+  out_of_scope: >
+    I only answer questions about Minh and his work — that one is outside my scope.
+    Anything you'd like to know about his research, requirements or delivery practice?
+  injection: >
+    I can't share how I'm set up, but I'm happy to answer anything about Minh's work.
+  third_party_pii: >
+    I don't share details about other people. I can tell you about Minh's role and what
+    the team achieved.
+  commitment: >
+    I can't commit on Minh's behalf — that's a conversation for him:
+    <b>hwinh.work@gmail.com</b>.
+  hostile: >
+    Let's keep this about the work. Happy to answer questions about Minh's projects or
+    process.
+  rate_limited: >
+    You have asked a lot of good questions. Give me a minute — or skip ahead and email
+    Minh at <b>hwinh.work@gmail.com</b>.
+
+escalation:
+  # Logged for the daily trace review, never answered.
+  log_and_flag:
+    - repeated_injection_in_session
+    - legal_or_visa_commitment
+    - request_for_third_party_contact
+    - defamation_bait
