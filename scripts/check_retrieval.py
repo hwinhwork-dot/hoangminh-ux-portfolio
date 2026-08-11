@@ -32,8 +32,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from agent.config import get_settings  # noqa: E402
-from agent.rag.rerank import rerank  # noqa: E402
-from agent.rag.retrieve import hybrid_search, load_index  # noqa: E402
+from agent.orchestrator.retrieval import retrieve_for  # noqa: E402
+from agent.rag.retrieve import load_index  # noqa: E402
 
 GOLDEN = ROOT / "eval" / "golden_set.json"
 
@@ -45,7 +45,8 @@ FLOOR_TYPES = {"unknown_topic"}
 
 
 def top_score(query: str) -> tuple[float, list[str]]:
-    hits = rerank(query, hybrid_search(query, 12), 4)
+    """Đi đúng đường mà orchestrator đi — mở rộng, chấm điểm, dự phòng."""
+    hits = retrieve_for(query)
     return (hits[0].score if hits else 0.0), [h.source_file for h in hits]
 
 
