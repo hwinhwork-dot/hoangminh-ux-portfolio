@@ -1861,14 +1861,10 @@
   /* ---------- chips ---------- */
   const CHIPS=[
     ['About Minh','Introduce Minh, who is he?'],
-    ['Skills chart','Show me a chart of Minh\'s skills'],
     ['Compare projects','Compare Minh\'s projects in a table'],
-    ['PRD & BRD','Which level of PRD can Minh write?'],
-    ['Now at VinGroup','What is Minh doing right now?'],
+    ['AI Talent at VinGroup','What is Minh doing right now?'],
     ['The VinFast agent','Tell me about the VinFast test-drive assistant'],
-    ['Agents & guardrails','How does Minh build agents and guardrails?'],
-    ['Designing for AI','How does he design for AI uncertainty?'],
-    ['Contact','How can I contact Minh?']
+    ['Designing for AI','How does he design for AI uncertainty?']
   ];
   CHIPS.forEach(([label,q])=>{ const b=document.createElement('button'); b.type='button'; b.className='ai-chip'; b.textContent=label;
     b.addEventListener('click',()=>orchestrate(q)); chipsBox.appendChild(b); });
