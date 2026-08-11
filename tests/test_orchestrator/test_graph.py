@@ -76,3 +76,31 @@ async def test_without_a_key_the_turn_is_marked_degraded_but_still_answers():
 async def test_orchestrator_never_raises_on_hostile_input():
     for message in ["'; DROP TABLE users; --", "\x00\x01", "🙂" * 50, "../../etc/passwd"]:
         assert (await ask(message)).answer_html
+
+
+# --- cross-language without embeddings --------------------------------------
+@pytest.mark.parametrize("message", [
+    "hiện tại Minh đang làm ở đâu?",
+    "kinh nghiệm làm việc của Minh thế nào?",
+    "Minh có biết làm PRD không?",
+])
+async def test_vietnamese_questions_answer_without_embeddings(message):
+    """Regression from production: these returned "I have not indexed that".
+
+    With no key configured there is no dense retrieval, and a Vietnamese question shares
+    no vocabulary with an English corpus — so the floor, correctly measured against the
+    visitor's own words, refused a perfectly answerable question. A matched routing rule
+    now licenses a second pass scored against the rule's translation.
+    """
+    response = await ask(message)
+    assert "not indexed" not in response.answer_html.lower(), message
+
+
+@pytest.mark.parametrize("message", [
+    "Which companies has he worked for in Singapore?",
+    "What was his TOEIC score?",
+])
+async def test_the_fallback_pass_cannot_rescue_an_unanswerable_question(message):
+    # It is gated on a hand-written rule matching, and neither of these matches one.
+    response = await ask(message)
+    assert "not indexed" in response.answer_html.lower(), message

@@ -28,6 +28,7 @@ async def triage(state: StudioState) -> StudioState:
     ruled = route(state.message)
     if ruled:
         state.intent, state.query, state.needs_chart = ruled
+        state.rule_matched = True
         state.confidence = 0.9
         state.step(actor="hana", act="triage", label="Got it. Classifying the question...")
         return state

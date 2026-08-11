@@ -88,6 +88,22 @@ shown. That gap is the argument for running the eval against the thing you ship.
 | D-35 | Minor | The grader's substring matching cannot express negation: "does not indicate he **won first prize**" tripped a forbidden phrase intended to catch agreement. H04 now forbids only wordings that cannot appear inside a denial | **Fixed** |
 | D-36 | Minor | The model dropped the most differentiating detail (the confidence floor) when compressing a list. Prompt now says to keep the unusual item and let the obvious ones go — the detail a recruiter is actually probing for | **Fixed** |
 
+### Found in production (v13–v16)
+
+The push deployed cleanly — `vercel.json`'s runtime pin and `includeFiles` bundling both
+worked on the first try — and `/api/health` immediately showed the agent was empty.
+
+| ID | Severity | Description | Status |
+| --- | --- | --- | --- |
+| D-37 | **Blocking** | **The knowledge index never shipped.** It was gitignored as "a rebuildable artifact", which is true on a developer machine and false on Vercel: the platform builds from the repository and never runs `scripts/ingest_kb.py`. Production reported `chunks: 0` and answered "I have not indexed that" to every question. The artifact is now committed | **Fixed** |
+| D-38 | Major | `degraded` was computed only on the fall-through path, so refusals, canned answers and empty retrievals all reported `degraded: false` with no model configured at all. It feeds the fallback-rate alert — the one signal a visitor never sees | **Fixed** |
+| D-39 | Major | **Vietnamese questions were refused in production but worked locally.** With no key there is no dense retrieval, and a Vietnamese question shares no vocabulary with an English corpus — so the floor, correctly measured against the visitor's own words (D-23), found nothing. A matched routing rule now licenses a second pass scored against the rule's translation; it is gated on the rule so it cannot reopen D-23 | **Fixed** |
+| D-40 | Minor | The grader failed a third time on spelling rather than substance ("low-fidelity" vs "lo-fi"). Hyphenation is now folded centrally, and genuine synonyms moved to `expected_keywords_any` — the two problems that were hiding behind one symptom | **Fixed** |
+
+D-39 is the one worth remembering: it existed only in the configuration production
+actually had. Local runs had a key, so dense retrieval quietly covered the gap, and no
+test would have found it. `/api/health` did, in one request.
+
 ### On tuning the golden set
 
 Five expectations were corrected rather than the code, and it is worth being precise

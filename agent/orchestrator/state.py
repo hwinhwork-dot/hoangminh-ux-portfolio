@@ -22,6 +22,7 @@ class StudioState:
     intent: Intent | None = None
     query: str = ""
     needs_chart: bool = False
+    rule_matched: bool = False
     language_in: str = "en"
     confidence: float = 0.0
 

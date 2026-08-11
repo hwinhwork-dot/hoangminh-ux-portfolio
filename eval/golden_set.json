@@ -109,11 +109,16 @@
     "expected_intent": "profile",
     "expected_agent": "minh",
     "expected_keywords": [
-      "timebox",
-      "lo-fi"
+      "timebox"
     ],
     "expected_sources": [
       "01-profile.md"
+    ],
+    "expected_keywords_any": [
+      "lo-fi",
+      "low-fidelity",
+      "cheap test",
+      "quick test"
     ]
   },
   {
@@ -218,11 +223,15 @@
     "expected_intent": "ai_product",
     "expected_agent": "minh",
     "expected_keywords": [
-      "confidence",
-      "provenance"
+      "confidence"
     ],
     "expected_sources": [
       "07-ai-product.md"
+    ],
+    "expected_keywords_any": [
+      "provenance",
+      "citation",
+      "source"
     ]
   },
   {

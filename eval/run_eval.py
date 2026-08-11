@@ -55,9 +55,20 @@ def strip_tags(html: str) -> str:
 
 
 def normalise(text: str) -> str:
-    """Fold the differences a grader must not care about: dashes, quotes, whitespace."""
+    """Fold the differences a grader must not care about.
+
+    Typographic dashes and quotes, and — the one that kept biting — hyphenation. A model
+    writing "human in the loop" where the knowledge base writes "human-in-the-loop" has
+    not said anything different. Ranges survive this: "55-65" and "55 65" both reduce to
+    the same token sequence as the text they are matched against.
+
+    What this deliberately does NOT do is resolve synonyms. "low-fidelity" is not a
+    respelling of "lo-fi", and pretending otherwise would make the grader agreeable
+    rather than useful. Those cases belong in `expected_keywords_any`.
+    """
     for a, b in (("\u2013", "-"), ("\u2014", "-"), ("\u2019", "'"), ("\u201c", '"'), ("\u201d", '"')):
         text = text.replace(a, b)
+    text = text.replace("-", " ")
     return " ".join(text.split()).lower()
 
 
